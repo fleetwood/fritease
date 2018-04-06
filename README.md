@@ -1,2 +1,0 @@
-# fritease
-Integration with #FriTease

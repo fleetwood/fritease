@@ -1,0 +1,18 @@
+{
+  "name": "fritease",
+  "scripts": {
+  },
+  "env": {
+    "NODE_ENV": "stage"
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/node"
+    }
+  ]
+}

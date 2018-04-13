@@ -3,28 +3,25 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "gulp & node ./bin/www"
+    "start": "gulp & node app.js"
   },
   "dependencies": {
-    "ajv": "^6.4.0",
     "bootstrap": "^4.0.0",
+    "config": "^1.30.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "eslint": "^4.19.1",
     "express": "~4.16.0",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^4.0.1",
     "http-errors": "~1.6.2",
     "jade": "^1.11.0",
+    "jade-cli": "^0.1.1",
+    "jquery": "^3.3.1",
     "less-middleware": "~2.2.1",
-    "morgan": "^1.9.0",
-    "peer-dep": "^1.0.0",
+    "morgan": "~1.9.0",
+    "pug-cli": "^1.0.0-alpha6",
+    "twit": "^2.2.9",
     "winston": "^2.4.1"
-  },
-  "devDependencies": {
-    "browser-sync": "^2.23.6",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.10.0",
-    "gulp": "^3.9.1",
-    "gulp-cli": "^2.0.1",
-    "gulp-sass": "^4.0.0"
   }
 }

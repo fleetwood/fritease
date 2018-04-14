@@ -1,12 +1,11 @@
 extends layout
 
-- var status = [{}]
-
 block content
   #timeline.content-main.AdaptiveSearchTimeline(role="main", aria-labelledby="content-main-heading")
     span.visuallyhidden(id="content-main-heading") Search results
     .stream-container
       .stream-item.js-new-items-bar-container
+      .stream
         ol.stream-items.js-navigable-stream(id="stream-items-id")
           each tweet in message.data.statuses 
             li.js-stream-item.stream-item.stream-item(data-item-id='#{tweet.id}', data-item-type='tweet')
@@ -54,7 +53,7 @@ block content
                             span.Icon.Icon--medium.Icon--retweet
                               span.u-hiddenVisually Retweet
                             span.ProfileTweet-actionCount
-                              span.ProfileTweet-actionCountForPresentation(aria-hidden='true')= tweet.retweet_count
+                            span.ProfileTweet-actionCountForPresentation(aria-hidden='true')= tweet.retweet_count
                       .ProfileTweet-action.ProfileTweet-action--buffer.js-toggleState
                         button.ProfileTweet-actionButton.js-actionButton(type='button')
                           .IconContainer.js-tooltip(data-original-title='Add to Buffer')
@@ -66,10 +65,15 @@ block content
                         button.ProfileTweet-actionButton.js-actionButton.js-actionFavorite(type='button', aria-describedby='profile-tweet-action-favorite-count-aria-#{tweet.id}')
                           .IconContainer.js-tooltip(title='Like')
                             span.Icon.Icon--heart.Icon--medium(role='presentation')
-                              .HeartAnimation
-                              span.u-hiddenVisually Like
-                            span.ProfileTweet-actionCount
-                            span.ProfileTweet-actionCountForPresentation(aria-hidden='true')= tweet.favorite_count
+                            .HeartAnimation
+                            span.u-hiddenVisually Like
+                          span.ProfileTweet-actionCount
+                          span.ProfileTweet-actionCountForPresentation(aria-hidden='true')= tweet.favorite_count
+                      .ProfileTweet-action.ProfileTweet-action--award.js-toggleState
+                        button.ProfileTweet-actionButton.js-actionButton.js-actionAward(type='button', aria-describedby='profile-tweet-action-award-aria-#{tweet.id}')
+                          .IconContainer.js-tooltip(title='Award')
+                            span.Icon.Icon--promotedTrend.Icon--medium(role='presentation')
+                            span.u-hiddenVisually Award
                       .ProfileTweet-action.ProfileTweet-action--analytics
                         button.ProfileTweet-actionButton.u-textUserColorHover.js-actionButton.js-actionQuickPromote(type='button')
                           .IconContainer.js-tooltip(title='View Tweet activity')

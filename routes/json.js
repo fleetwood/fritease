@@ -14,10 +14,10 @@ const searchedData = (err, data, response) => {
 router.get('/', (req, res, next) => {
   T.get('search/tweets', params, searchedData)
   .then(results => {
-    res.render('index', { title: 'FriTease',  message: results, json: JSON.stringify(results, null, 2)});
+    res.render('json', { title: 'FriTease',  message: results, json: JSON.stringify(results, null, 2)});
   })
   .catch(error => {
-    res.render('index', {title: 'Nope', message: `Shit broke: ${error.message}`})
+    res.render('json', {title: 'Nope', message: `Shit broke: ${error.message}`})
   })
 });
 

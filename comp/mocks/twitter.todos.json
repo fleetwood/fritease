@@ -1,0 +1,55 @@
+{
+    "title": "To Dos",
+    "footer": "Reload",
+    "list": [
+        {
+            "title": "Prompt Designer",
+            "description": [
+                "Image selector",
+                "Character counter."
+            ],
+            "footer": "Build out the prompt designer"
+        },
+        {
+            "title": "Notifs",
+            "description": [
+                "Add notifications:",
+                "1. Tweet posted."
+            ],
+            "footer": "Build out the prompt designer"
+        },
+        {
+            "title": "FF5",
+            "description": [
+                "Disable Add buttons for users already in FF5.",
+                "Remove Clear button if Empty.",
+                "Update Template to include user info."
+            ],
+            "footer": "FF5 Tweaks. Low Priority."
+        },
+        {
+            "title": "Sorter",
+            "description": [
+                "Sort the stream by certain properties."
+            ],
+            "footer": "Date, User Rank, Likes/Retweets"
+        },
+        {
+            "title": "Post Prompt",
+            "description": [
+                "Schedule and send!"
+            ]
+        },
+        {
+            "title": "Pub-Sub",
+            "description": [
+                "Set up a Kafka queue for checking on new entries or performing user rank logic!"
+            ],
+            "footer": "Holy fuck the christ, ugh."
+        },
+        {
+            "title": "This",
+            "footer": "Replace this with something else."
+        }
+    ]
+}

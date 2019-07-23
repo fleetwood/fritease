@@ -4,7 +4,7 @@
   "description": "Automating FriTease",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"No tests specified\" && exit 0",
     "nodemon": "nodemon --watch comp/ --watch views/ --watch scripts/ -e hbs  index.js",
     "build": "npm i",
     "start": "node index.js"
@@ -31,14 +31,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/Fleetwood/fritease.git"
+    "url": "https://github.com/fleetwood/fritease.git"
   },
   "author": "Fleetwood",
   "license": "ISC",
-  "bugs": {
-    "url": "https://gitlab.com/Fleetwood/fritease/issues"
-  },
-  "homepage": "https://gitlab.com/Fleetwood/fritease#readme",
   "devDependencies": {
     "nodemon": "^1.19.1"
   }

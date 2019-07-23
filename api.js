@@ -87,7 +87,8 @@ const init = (app) => {
             res.render('partials/twitter/dashboard-userlist', {
                 title: 'FF5',
                 list: users,
-                isFF5: true,
+                isFF5: users.length>0,
+                footer: 'Add some users!',
                 layout: false
             });
         } 

@@ -188,11 +188,7 @@ const asNum = (num, pos = true) => {
  * @returns {String} Original string or null
  */
 const stringOrNull = (str) => {
-    try {
-        return str.toString();
-    } catch {
-        return null
-    };
+    return str.length ? str.toString() : null;
 }
 
 /**

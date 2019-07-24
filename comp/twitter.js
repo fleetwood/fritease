@@ -167,98 +167,24 @@ const makePost = (endpoint, params) => new Promise((resolve, reject) => {
     });
 });
 
-const mediaUpload = (mediaFilePath) => new Promise((resolve, reject) => {
-    let mediaType = mime.getType(mediaFilePath)
-        , mediaFileSizeBytes = fs.statSync(mediaFilePath).size;
-    console.log(`Uploading ${mediaFilePath}...`);
-    twitter.post(endpoints.mediaUpload, {
-        'command': 'INIT',
-        'media_type': mediaType,
-        'total_bytes': mediaFileSizeBytes
-    }, (err, bodyObj, resp) => {
-        let mediaIdStr = bodyObj.media_id_string
-            , isStreamingFile = true
-            , isUploading = false
-            , segmentIndex = 0;
-        let fStream = fs.createReadStream(mediaFilePath, { highWaterMark: 5 * 1024 * 1024 });
-
-        const finalizeMedia = (mediaIdStr, cb) => {
-            console.log('\tFinalizing....');
-            twitter.post('media/upload', 'media/upload', {
-                'command': 'FINALIZE',
-                'media_id': mediaIdStr
-            }, cb)
-        }
-
-        const finalizeResult = (err, results, resp) => {
-            console.log('DONE!!');
-            if (err) {
-                reject(err);
-            }
-            else {
-                resolve(results);
-            }
-        }
-
-        fStream.on('data', function (buff) {
-            fStream.pause();
-            isStreamingFile = false;
-            isUploading = true;
-
-            console.log('\tAppending....')
-            twitter.post('media/upload', {
-                'command': 'APPEND',
-                'media_id': mediaIdStr,
-                'segment_index': segmentIndex,
-                'media': buff.toString('base64'),
-            }, (err, bodyObj, resp) => {
-                isUploading = false;
-
-                if (!isStreamingFile) {
-                    finalizeMedia(mediaIdStr, finalizeResult);
-                }
-            });
-        });
-
-        fStream.on('end', function () {
-            isStreamingFile = false;
-            console.log('\tStreaming...');
-
-            if (!isUploading) {
-                finalizeMedia(mediaIdStr, finalizeResult);
-            }
-        });
-    });
-});
-
-const postPrompt = (mediaFilePath, status) => new Promise((resolve, reject) => {
-    fs.readFileAsync(path.join(__dirname, mediaFilePath), 'base64')
-        .then(filedata => {
-
-            // first we must post the media to Twitter
-            twitter.post('media/upload', { media_data: filedata }, (err, data, response) => {
-                if (err) reject(err);
-                // now we can assign alt text to the media, for use by screen readers and
-                // other text-based presentations and interpreters
-                var mediaIdStr = data.media_id_string
-                var altText = "Small flowers in a planter on a sunny balcony, blossoming."
-                var meta_params = { media_id: mediaIdStr, alt_text: { text: altText } };
-
-                twitter.post('media/metadata/create', meta_params, (err, data, response) => {
-                    if (err) reject(err);
-                    else {
-                        // now we can reference the media and post a tweet (media will attach to the tweet)
-                        var params = { status: status, media_ids: [mediaIdStr] }
-
-                        twitter.post('statuses/update', params, function (err, data, response) {
-                            if (err) reject(err);
-                            else resolve(data);
-                        });
-                    }
-                });
-            });
+const postPrompt = (mediaFilePath, statusText) => new Promise((resolve, reject) => {
+    uploadMediaChunks(utils.absolutePath(mediaFilePath))
+        .then(mediaId => {
+            console.log(`\tmediaId ${mediaId}`);
+            let status = {
+                status: statusText,
+                media_ids: mediaId // Pass the media id string
+            };
+            makePost(twitter.endpoints.postTweet, status)
+                .then(result => {
+                    console.log(`SUCCESS!`);
+                    resolve(result);
+                })
         })
-        .catch(e => reject(e));
+        .catch(e => {
+            console.error(`WAH WAH WAHHHHHH! \n${e.allErrors.map(err => err.message).join('\n') || e.message || JSON.stringify(e)}`);
+            reject(e);
+        });
 });
 
 /**
@@ -343,7 +269,6 @@ module.exports = {
     getUserList,
     makePost,
     mapStatuses,
-    mediaUpload,
     postPrompt,
     twitter,
     uploadMediaChunks

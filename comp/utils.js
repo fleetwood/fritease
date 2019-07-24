@@ -1,5 +1,6 @@
 /////////////////////////////
 // REQUIRES
+const config = require('./config');
 const moment = require('moment');
 const fs = require('fs');
 const path = require('path');
@@ -282,11 +283,24 @@ const nextFriday = (date) => {
     return date;
 }
 
+/**
+ * 
+ * @param {Moment} date Starting date
+ * @returns {Moment} If _date_ is not a Thursday, returns the next following Thursday
+ */
+const nextThursday = (date) => {
+    while(date.day() !== 4) {
+        date.add(1, 'd');
+    }
+    return date;
+}
+
 const log = (str) => console.log(str);
 
 module.exports = {
     absolutePath,
     asNum,
+    config,
     dateFormats,
     emoji,
     fs,
@@ -297,6 +311,7 @@ module.exports = {
     log,
     moment,
     nextFriday,
+    nextThursday,
     path,
     rand,
     stringOrNull

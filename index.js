@@ -12,6 +12,7 @@ const utils = require('./comp/utils');
 const app = express();
 const twitter = require('./comp/twitter');
 const moment = utils.moment;
+const Scheduler = require('./comp/Scheduler');
 
 app.use(function (req, res, next) {
     req.rawBody = '';
@@ -88,6 +89,7 @@ app.get('/', (req, res) => {
         .catch(e => reject(e));
   });
 
+const scheduler = new Scheduler();
 const server = http.createServer(app);
 server.listen(config.port, null, function () {
     console.log('Express webserver configured and listening at http://localhost:' + config.port);

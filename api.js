@@ -42,29 +42,19 @@ const init = (app) => {
     app.get('/api/postPrompt', (req, res) => {
         let mediaFilePath = `./../public${req.query.imageUrl}`
             , statusText = req.query.statusText;
-        twitter.uploadMediaChunks(utils.absolutePath(mediaFilePath))
-            .then(mediaId => {
-                console.log(`\tmediaId ${mediaId}`);
-                let status = {
-                    status: statusText,
-                    media_ids: mediaId // Pass the media id string
-                };
-                twitter.makePost(twitter.endpoints.postTweet, status)
-                    .then(result => {
-                        console.log(`SUCCESS!`);
-                        res.send({
-                            status:200,
-                            data: result
-                        });
-                    })
+        twitter.postPrompt(mediaFilePath, statusText)
+            .then(result => {
+                res.send({
+                    status:200,
+                    data: result
+                });
             })
             .catch(e => {
-                console.error(`WAH WAH WAHHHHHH! \n${e.allErrors.map(err => err.message).join('\n') || e.message || JSON.stringify(e)}`);
                 res.send({
                     status: 500,
                     error: e.allErrors || e.message || e.stack || e
                 });
-            })
+            });
     });
 }
 

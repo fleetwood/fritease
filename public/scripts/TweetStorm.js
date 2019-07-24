@@ -16,7 +16,8 @@
                 imageUrl: '',
                 theme1: '',
                 theme2: ''
-            }
+            },
+            promptImg: '#prompt-image'
         }, options);
 
         const nextFriday = (format = 'MM/DD/YYYY') => {
@@ -107,7 +108,7 @@ L/RT your favorites!
 
         this.setCurrent = () => {
             textForm = $(settings.textForm);
-            const promptImage = $('#prompt-image');
+            const promptImage = $(settings.promptImg);
             let text = defaultText;
 
             FF5.all
@@ -147,6 +148,20 @@ L/RT your favorites!
         });
 
         $(settings.showButton).click(e => getStream());
+
+        $('body').on('click', '.SendTweetsButton',(e) => {
+            $.ajax({
+                url: '/api/postPrompt',
+                type: 'GET',
+                contentType: 'application/json',
+                data: {
+                    statusText: textForm.val(),
+                    imageUrl: $(settings.promptImg).attr('src')
+                },
+                error: (err) => FF5.dispatch(FF5.Events.notice, err.statusText),
+                success: () => FF5.dispatch(FF5.Events.notice, `Tweet scheduled for ${$(settings.promptImg).attr('data-prompt-date')}!`)
+            });
+        });
 
         return this;
     };

@@ -10,6 +10,15 @@ const images = (forDate) => {
         : results.where('id','>',0);
 }
 
+const scheduledPosts = (where) => {
+    let results = knex
+        .select('*')
+        .from('ff_posts');
+    return where
+        ? results.where(where)
+        : results;
+}
+
 const ffUsers = (where) => {
     let results = knex
             .select('*')
@@ -22,5 +31,6 @@ const ffUsers = (where) => {
 module.exports = {
     images,
     knex,
-    ffUsers
+    ffUsers,
+    scheduledPosts
 }

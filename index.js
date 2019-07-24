@@ -7,6 +7,7 @@ const hbs = require('express-hbs');
 const http = require('http');
 const path = require('path');
 const api = require('./api');
+const apiUI = require('./api.ui');
 const utils = require('./comp/utils');
 const app = express();
 const twitter = require('./comp/twitter');
@@ -42,6 +43,7 @@ hbs.registerHelper('gt', function (a, b, options) {
 });
 
 api.init(app);
+apiUI.init(app);
 
 app.get('/', (req, res) => {
     res.render('index', {

@@ -130,7 +130,7 @@ if (isUndefined(Array.limit)) {
 
 if(isUndefined(fs.readFileAsync)) {
     // make Promise version of fs.readFile()
-    fs.readFileAsync = function (filename, enc) {
+    fs.readFileAsync = function (filename, enc = 'utf8') {
         return new Promise(function (resolve, reject) {
             fs.readFile(filename, enc, function (err, data) {
                 if (err)
@@ -232,6 +232,8 @@ const emoji = {
     check: '✔'
 };
 
+const absolutePath = (filepath) => path.join(__dirname, filepath);
+
 /**
  * @property {String} dateFormats.twitter ddd MMM DD hh:mm:ss Z YYYY
  * @property {String} dateFormats.fritease MMM DD, hh:mm a
@@ -283,6 +285,7 @@ const nextFriday = (date) => {
 const log = (str) => console.log(str);
 
 module.exports = {
+    absolutePath,
     asNum,
     dateFormats,
     emoji,

@@ -1,6 +1,8 @@
 const twitter = require('./comp/twitter');
 const knex = require('./comp/db/knex');
-const utils = require('./comp/utils');
+const utils = require('./comp/utils')
+    , path = utils.path
+    , fs = utils.fs;
 const User = require('./comp/twitter/User');
 const moment = utils.moment;
 
@@ -73,26 +75,54 @@ const init = (app) => {
                 res.send(user.data);
             })
             .catch(e => {
-                res.send({status: 500, error: e});
+                res.send({ status: 500, error: e });
             });
-    })
+    });
+
+    app.get('/api/postPrompt', (req, res) => {
+        let mediaFilePath = `./../public${req.query.imageUrl}`
+            , statusText = req.query.statusText;
+        twitter.uploadMediaChunks(utils.absolutePath(mediaFilePath))
+            .then(mediaId => {
+                console.log(`\tmediaId ${mediaId}`);
+                let status = {
+                    status: statusText,
+                    media_ids: mediaId // Pass the media id string
+                };
+                twitter.makePost(twitter.endpoints.postTweet, status)
+                    .then(result => {
+                        console.log(`SUCCESS!`);
+                        res.send({
+                            status:200,
+                            data: result
+                        });
+                    })
+            })
+            .catch(e => {
+                console.error(`WAH WAH WAHHHHHH! \n${e.allErrors.map(err => err.message).join('\n') || e.message || JSON.stringify(e)}`);
+                res.send({
+                    status: 500,
+                    error: e.allErrors || e.message || e.stack || e
+                });
+            })
+    });
 
     ////////////////////////////////////
     // UI Endpoints
     app.post('/api/ui/ff5', (req, res) => {
         try {
-            let users = req.body.users 
+            let users = req.body.users
                 ? req.body.users.map(u => new User(u))
                 : [];
             res.render('partials/twitter/dashboard-userlist', {
                 title: 'FF5',
                 list: users,
-                isFF5: users.length>0,
+                isFF5: users.length > 0,
                 footer: 'Add some users!',
                 layout: false
             });
-        } 
-        catch(e) {
+        }
+        catch (e) {
             renderUiError(res, e);
         }
     });
@@ -134,7 +164,8 @@ const init = (app) => {
                 image.date = moment(image.date).format(utils.dateFormats.ui);
                 res.render('partials/modals/tweet-attachment', {
                     image,
-                    layout: false })
+                    layout: false
+                })
             })
             .catch(e => {
                 renderUiError(res, e);

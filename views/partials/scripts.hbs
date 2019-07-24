@@ -17,7 +17,7 @@
             url: '/api/ui/todolist'
         }).getStream();
         
-        $('#Tweetstorm-dialog').tweetStorm({
+        const tweetStorm = $('#Tweetstorm-dialog').tweetStorm({
             modalUrl: '/api/ui/modalContent',
             imageUrl: '/api/ui/modalImage',
             contentContainer: '#Tweetstorm-dialog-dialog',
@@ -33,5 +33,19 @@
         });
 
         FF5.init();
+
+        $('body').on('click', '.SendTweetsButton',(e) => {
+            $.ajax({
+                url: '/api/postPrompt',
+                type: 'GET',
+                contentType: 'application/json',
+                data: {
+                    statusText: $('#tweet-textarea').val(),
+                    imageUrl: $('#prompt-image').attr('src')
+                },
+                error: (err) => console.log(err.statusText),
+                success: (result) => $(tweetStorm.selector.contentContainer).html(result)
+            });
+        })
     });
 </script>

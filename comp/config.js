@@ -9,7 +9,7 @@ const knex = {
         "database": env.DB,
         "user": env.DB_USER,
         "port": env.DB_PORT,
-        "password": env.DB_PW
+        "password": env.DB_PW,
     },
     "pool": {
         "min": 2,

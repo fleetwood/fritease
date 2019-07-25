@@ -3,6 +3,7 @@ const utils = require('./../comp/utils');
 const moment = utils.moment
     , path = utils.path
     , fs = utils.fs;
+const knex = require('./../comp/db/knex');
 const mime = require('mime');
 const Twit = require('twit');
 const User = require('./twitter/User');
@@ -37,7 +38,7 @@ const endpoints = {
     searchUsers: 'users/lookup',
     getUser: 'users/show',
     mediaUpload: 'media/upload',
-    postTweet : 'statuses/update'
+    postTweet: 'statuses/update'
 };
 
 const mapStatuses = (data) => {
@@ -251,13 +252,65 @@ const uploadMediaChunks = (filename) => new Promise((resolve, reject) => {
             media_id: mediaId
         }).then(data => mediaId);
     }
-    
+
     getMediaData() // Get the file chunks
         .then(initUpload) // Declare that you wish to upload some media
         .then(appendUpload) // Send the data for the media
         .then(finalizeUpload) // Declare that you are done uploading chunks
         .then(mediaId => resolve(mediaId)) // W00t done!!
         .catch(e => reject(e)); // Sad trombone.
+});
+
+/**
+ * 
+ * @param {moment} date The date of the scheduled prompt
+ */
+const postScheduledPrompt = (date) => new Promise((resolve, reject) => {
+    knex.db('ff_posts')
+        .select('*')
+        .where('date', date.format('MM/DD/YYYY'))
+        .whereIn('complete', [null, false])
+        .then(result => {
+            if (result && result[0] !== null && result[0] !== []) {
+                let scheduledPrompt = result[0];
+                postPrompt(path.join('./../public',scheduledPrompt.image), scheduledPrompt.statustext)
+                    .then(postedPrompt => {
+                        if (postedPrompt.id) {
+                            knex.db('ff_posts')
+                                .where('id', scheduledPrompt.id)
+                                .update({
+                                    complete: true,
+                                    url: postedPrompt.url
+                                })
+                                .then(finish => {
+                                    resolve(postedPrompt);
+                                });
+                        }
+                        else {
+                            reject('Failed on postPrompt()');
+                        }
+                    })
+            }
+            else {
+                reject('Did not find scheduledPrompt in database.');
+            }
+        })
+        .catch(e => {
+            reject(e);
+        });
+});
+
+const isPromptScheduled = (date) => new Promise((resolve, reject) => {
+    knex.db('ff_posts')
+        .select('*')
+        .where('date', '>=', date.format('MM/DD/YYYY'))
+        .where('complete', null)
+        .then(result => {
+            resolve((result && result[0] !== null && result[0] !== []));
+        })
+        .catch(e => {
+            reject(e);
+        });
 });
 
 module.exports = {
@@ -267,9 +320,11 @@ module.exports = {
     getUser,
     getUsers,
     getUserList,
+    isPromptScheduled,
     makePost,
     mapStatuses,
     postPrompt,
+    postScheduledPrompt,
     twitter,
     uploadMediaChunks
 };

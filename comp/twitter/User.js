@@ -127,7 +127,7 @@ class User {
     }
 
     save() {
-        //todo: write to db
+        // TODO: write to db
     }
 }
 

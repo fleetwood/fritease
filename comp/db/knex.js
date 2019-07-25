@@ -28,9 +28,15 @@ const ffUsers = (where) => {
         : results;
 }
 
+knex.on('query', function( queryData ) {
+    let sql = queryData.sql;
+    queryData.bindings.forEach(b => sql.replace('?',b));
+    console.log(sql);
+});
+
 module.exports = {
-    images,
-    knex,
+    db: knex,
     ffUsers,
+    images,
     scheduledPosts
 }

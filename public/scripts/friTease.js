@@ -2,7 +2,8 @@ $(document).ready(function () {
     const streamContent = $('#stream-content');
     const streamLoading = $('#stream-loading');
     
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = {};
+    new URLSearchParams(window.location.search).forEach((v,k) => urlParams[k]=v);
 
     const render = (content) => {
         streamContent.html(content);
@@ -35,6 +36,7 @@ $(document).ready(function () {
         $.ajax({
             url: "api/ui/friTease",
             data: {
+                ...urlParams,
                 friTease: true,
                 retweets: false
             },

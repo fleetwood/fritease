@@ -32,6 +32,7 @@ exports.up = function (knex, Promise) {
             table.increments('id').primary();
             table.date('date');
             table.string('image');
+            table.string('ff5_users');
             table.string('statustext');
             table.boolean('complete');
             table.boolean('notified');

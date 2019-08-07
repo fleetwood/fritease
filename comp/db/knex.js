@@ -31,7 +31,9 @@ const ffUsers = (where) => {
 knex.on('query', function( queryData ) {
     let sql = queryData.sql;
     queryData.bindings.forEach(b => sql.replace('?',b));
-    console.log(sql);
+    if (config.knex.debug === true) {
+        console.log(sql);
+    }
 });
 
 module.exports = {

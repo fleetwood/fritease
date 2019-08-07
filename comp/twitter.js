@@ -81,9 +81,7 @@ const mapStatuses = (data) => {
 };
 
 const mapUsers = (data, limit = -1) => {
-    const users = data
-        .map(d => new User(d))
-        .sortBy('rank');
+    const users = data.map(d => new User(d));
     return limit > 0 ? users.limit(limit) : users;
 }
 
@@ -94,8 +92,8 @@ const friTease = (options) => new Promise((resolve, reject) => {
         })
         .catch(e => reject(e));
     // TODO: return endpoints
-    // const query = new Query(options);
-    // return twitter.get(endpoints.fullArchive, query.toQuery());
+    // const query = new Query(options).FriTease();
+    // return twitter.get(endpoints.searchTweets, query.toQuery());
 });
 
 /**
@@ -124,7 +122,6 @@ const getUser = (options) => new Promise((resolve, reject) => {
 const getUserList = (options, post) => new Promise((resolve, reject) => {
     utils.getFile(path.join(__dirname, searchTweets))
         .then(data => {
-
             let users = data.toJson().map(f => f.user);
             users = mapUsers(users, 20);
             users = users.dedupe('id');
@@ -176,7 +173,7 @@ const postPrompt = (mediaFilePath, statusText) => new Promise((resolve, reject) 
                 status: statusText,
                 media_ids: mediaId // Pass the media id string
             };
-            makePost(twitter.endpoints.postTweet, status)
+            makePost(endpoints.postTweet, status)
                 .then(result => {
                     console.log(`SUCCESS!`);
                     resolve(result);
@@ -300,13 +297,13 @@ const postScheduledPrompt = (date) => new Promise((resolve, reject) => {
         });
 });
 
-const isPromptScheduled = (date) => new Promise((resolve, reject) => {
+const getScheduledPrompt = (date) => new Promise((resolve, reject) => {
     knex.db('ff_posts')
         .select('*')
         .where('date', '>=', date.format('MM/DD/YYYY'))
         .where('complete', null)
         .then(result => {
-            resolve((result && result[0] !== null && result[0] !== []));
+            resolve((result && result[0]) ? result[0] : null);
         })
         .catch(e => {
             reject(e);
@@ -320,7 +317,7 @@ module.exports = {
     getUser,
     getUsers,
     getUserList,
-    isPromptScheduled,
+    getScheduledPrompt,
     makePost,
     mapStatuses,
     postPrompt,

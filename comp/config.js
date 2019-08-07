@@ -3,7 +3,7 @@ const env = process.env;
 
 const knex = {
     "client": "pg",
-    "debug": false,
+    "debug": env.DB_DEBUG && env.DB_DEBUG === true,
     "connection": {
         "host": env.DB_HOST,
         "database": env.DB,

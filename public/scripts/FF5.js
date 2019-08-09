@@ -66,7 +66,7 @@ class FF5 {
 
     /**
      * 
-     * @param {Number} id The user id to remove from storage (Strings will be converted to Number)
+     * @param {Number} id Select a user from storage by id (Strings will be converted to Number)
      */
     static get(id) {
         let result = sessionStorage.getItem(id);
@@ -136,6 +136,21 @@ class FF5 {
             all.push(item);
         }
         return all.map(u => JSON.parse(u));
+    }
+
+    /**
+     * Get all objects in a semi-colon separated string, ex "_{id:123,user_name:sue};{...}_"
+     */
+    static get asString() {
+        let all = [];
+        for (var i = 0; i < sessionStorage.length; i++){
+            let item = sessionStorage.getItem(sessionStorage.key(i));
+            all.push(item);
+        }
+        return JSON.stringify(all.map(u => {
+            let t = JSON.parse(u);
+            return {id: t.id, screen_name: t.screen_name};
+        }));
     }
 
     /**

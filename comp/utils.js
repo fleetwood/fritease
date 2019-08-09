@@ -301,6 +301,13 @@ module.exports = {
     absolutePath,
     asNum,
     config,
+    /**
+     * @property {String} dateFormats.twitter ddd MMM DD hh:mm:ss Z YYYY
+     * @property {String} dateFormats.fritease MMM DD, hh:mm a
+     * @property {String} dateFormats.images MM/DD/YYYY
+     * @property {String} dateFormats.ui MM/DD
+     * @description For formatting dates.   
+     */
     dateFormats,
     emoji,
     fs,

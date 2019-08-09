@@ -120,6 +120,7 @@ const getUser = (options) => new Promise((resolve, reject) => {
 });
 
 const getUserList = (options, post) => new Promise((resolve, reject) => {
+    // TODO: This should pull from twitter API
     utils.getFile(path.join(__dirname, searchTweets))
         .then(data => {
             let users = data.toJson().map(f => f.user);
@@ -150,6 +151,22 @@ const getUsers = (options, post) => new Promise((resolve, reject) => {
 });
 
 /**
+ * Get all users from a JSON string and upsert them into db as ff5_users
+ * @param {String} userlist Sample list: "[{"id":"123","screen_name":"john_smith", {...}}]"
+ */
+const updateFF5_Users = (userlist) => {
+    let users = JSON.parse(users);
+    let userNames = users.map(u => u.screen_name).join(',');
+    twitter.get(endpoints.searchUsers, {screen_name: userNames})
+        .then(data => {
+            let users = mapUsers(data.toJson().map(f => f.user));
+            knex.updateFF5_Users(users)
+                .then(result => console.log(result));
+        })
+        .catch(e => console.log(`ERROR updating FF5_Users() ${JSON.stringify(e)}`))
+}
+
+/**
  * (Utility function) Send a POST request to the Twitter API
  * @param String endpoint  e.g. 'statuses/upload'
  * @param Object params    Params object to send
@@ -165,7 +182,7 @@ const makePost = (endpoint, params) => new Promise((resolve, reject) => {
     });
 });
 
-const postPrompt = (mediaFilePath, statusText) => new Promise((resolve, reject) => {
+const postPrompt = (mediaFilePath, statusText, ff5_users) => new Promise((resolve, reject) => {
     uploadMediaChunks(utils.absolutePath(mediaFilePath))
         .then(mediaId => {
             console.log(`\tmediaId ${mediaId}`);
@@ -270,7 +287,7 @@ const postScheduledPrompt = (date) => new Promise((resolve, reject) => {
         .then(result => {
             if (result && result[0] !== null && result[0] !== []) {
                 let scheduledPrompt = result[0];
-                postPrompt(path.join('./../public',scheduledPrompt.image), scheduledPrompt.statustext)
+                postPrompt(path.join('./../public',scheduledPrompt.image, scheduledPrompt.ff5_users), scheduledPrompt.statustext)
                     .then(postedPrompt => {
                         if (postedPrompt.id) {
                             knex.db('ff_posts')
@@ -280,6 +297,7 @@ const postScheduledPrompt = (date) => new Promise((resolve, reject) => {
                                     url: postedPrompt.url
                                 })
                                 .then(finish => {
+                                    updateFF5_Users(scheduledPrompt.ff5_users);
                                     resolve(postedPrompt);
                                 });
                         }

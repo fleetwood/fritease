@@ -20,19 +20,8 @@
             promptImg: '#prompt-image'
         }, options);
 
-        const nextFriday = (format = 'MM/DD/YYYY') => {
-            let date = moment()
-            while (date.day() !== 5) {
-                date.add(1, 'd');
-            }
-            return date.format(format);
-        }
-
-        settings.promptImage.date = nextFriday();
-
-        const urlParams = new URLSearchParams(window.location.search)
-            , fromDate = urlParams.get('fromDate')
-            , defaultText = `#FriTease [date]
+        const defaultText = 
+`#FriTease [date]
 THEME 1: "[THEME_1]"
 THEME 2: "[THEME_2]"
 
@@ -44,13 +33,28 @@ THEME 2: "[THEME_2]"
 [FF5]
 
 L/RT your favorites!
-@PromptList @PromptAdvant @thewritelist @writevent`;
-
-        let me = this
+@PromptList @PromptAdvant @thewritelist @writevent`
+        
+        ////////////////////////////////
+        // SETUP
+        const urlParams = new URLSearchParams(window.location.search)
+            , fromDate = urlParams.get('fromDate')
             , contentContainer = $(settings.contentContainer)
-            , imageContainer
-            , textForm
-            , loader = settings.loader ? $(settings.loader) : null;
+            , params = {
+                imageUrl: () => $(settings.promptImg).attr('src'),
+                statusText: () => $(settings.textForm).val(),
+                scheduled_date: () => $(settings.promptImg).attr('data-prompt-date') || nextFriday()
+            };
+
+        ////////////////////////////////
+        // METHODS
+        const nextFriday = (format = 'MM/DD/YYYY') => {
+            let date = moment()
+            while (date.day() !== 5) {
+                date.add(1, 'd');
+            }
+            return date.format(format);
+        }
 
         const render = (val) => {
             contentContainer.html(val);
@@ -59,7 +63,6 @@ L/RT your favorites!
                 showModal(true);
                 getImage();
             });
-            // showLoader(false);
         }
 
         const renderImage = (val) => {
@@ -67,36 +70,22 @@ L/RT your favorites!
             OnRender.watchRender(settings.imageContainer,() => {
                 this.setCurrent();
             });
-            // showLoader(false);
         }
 
         const showModal = (show) => {
             this.attr('style', show ? 'z-index: 4002; display: block;' : '');
         }
 
-        const showLoader = (loading) => {
-            const hidden = 'u-hiddenVisually';
-            if (loader && contentContainer) {
-                const set = loading ? [loader, contentContainer] : [contentContainer, loader];
-                set[0].removeClass(hidden);
-                set[1].addClass(hidden);
-            } else if (loader) {
-                if (loading) loader.addClass(hidden);
-                else loader.removeClass(hidden);
-            }
-        }
-
         const getImage = () => {
             $.ajax({
                 url: settings.imageUrl,
-                data: { date: settings.promptImage.date },
+                data: { date: params.scheduled_date() },
                 error: (err => render(err.statusText)),
                 success: (result => renderImage(result))
             });
         };
 
         const getStream = () => {
-            // showLoader(true);
             showModal(false);
             $.ajax({
                 url: settings.modalUrl,
@@ -137,7 +126,8 @@ L/RT your favorites!
         }
 
         ////////////////////////////////////
-        // set up event listeners
+        // EVENT BINDINGS
+        let me = this;
         this.click(e => {
             const mid = me.attr('id');
             const bid = $(settings.closeButton).attr('id');
@@ -149,17 +139,41 @@ L/RT your favorites!
 
         $(settings.showButton).click(e => getStream());
 
-        $('body').on('click', '.SendTweetsButton',(e) => {
+        $('body').on('click', '.PostPromptButton',(e) => {
             $.ajax({
                 url: '/api/postPrompt',
                 type: 'GET',
                 contentType: 'application/json',
                 data: {
-                    statusText: textForm.val(),
-                    imageUrl: $(settings.promptImg).attr('src')
+                    statusText: params.statusText(),
+                    imageUrl: params.imageUrl()
                 },
                 error: (err) => FF5.dispatch(FF5.Events.notice, err.statusText),
-                success: () => FF5.dispatch(FF5.Events.notice, `Tweet scheduled for ${$(settings.promptImg).attr('data-prompt-date')}!`)
+                success: (result) => {
+                    showModal(false);
+                    FF5.clear();
+                    FF5.dispatch(FF5.Events.notice, `Tweet posted!\n${JSON.stringify(result.data)}`);
+                }
+            });
+        });
+        
+        $('body').on('click', '.SchedulePromptButton',(e) => {
+            $.ajax({
+                url: '/api/schedulePrompt', 
+                type: 'GET',
+                contentType: 'application/json',
+                data: {
+                    statusText: params.statusText(),
+                    imageUrl: params.imageUrl(),
+                    date: params.scheduled_date(),
+                    ff5_users: FF5.asString
+                },
+                error: (err) => FF5.dispatch(FF5.Events.notice, err.statusText),
+                success: (result) => {
+                    showModal(false);
+                    FF5.clear();
+                    FF5.dispatch(FF5.Events.notice, `Tweet scheduled!\n${params.scheduled_date}`);
+                }
             });
         });
 

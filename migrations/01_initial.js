@@ -30,7 +30,7 @@ exports.up = function (knex, Promise) {
 
         knex.schema.createTable('ff_posts', function(table){
             table.increments('id').primary();
-            table.date('date');
+            table.date('date').unique();
             table.string('image');
             table.string('ff5_users');
             table.string('statustext');

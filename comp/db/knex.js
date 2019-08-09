@@ -19,6 +19,30 @@ const scheduledPosts = (where) => {
         : results;
 }
 
+const saveScheduledPrompt = (params) => new Promise((resolve, reject) => {
+    // params = {
+    //     image: req.query.imageUrl,
+    //     statustext: req.query.statusText,
+    //     ff5_users: req.query.ff5_users,
+    //     date: req.query.date
+    // };
+    const insert = knex('ff_posts')
+        .insert(params)
+        .toString();
+    const update = knex('ff_posts')
+        .update(params)
+        .whereRaw(`ff_posts.date = ?`, [params.date])
+        .toString();
+    const query = `${insert} 
+        ON CONFLICT (date) 
+        DO UPDATE 
+        SET ${update.replace(/^update\s.*\sset\s/i, '')}`;
+
+    knex.raw(query)
+        .then(res => resolve(res))
+        .catch(e => reject(e));
+});
+
 const ffUsers = (where) => {
     let results = knex
             .select('*')
@@ -27,6 +51,16 @@ const ffUsers = (where) => {
         ? results.where(where)
         : results;
 }
+
+/**
+ * Iterates through all users in the list, and upserts in the db with the new FF5 date
+ * @param {Array<User>} userList A collection of to update in database
+ * @see ./comp/twitter/User
+ */
+const updateFF5_Users = (userList) => new Promise((resolve, reject) => {
+   resolve()
+   reject()
+});
 
 knex.on('query', function( queryData ) {
     let sql = queryData.sql;
@@ -40,5 +74,7 @@ module.exports = {
     db: knex,
     ffUsers,
     images,
-    scheduledPosts
+    saveScheduledPrompt,
+    scheduledPosts,
+    updateFF5_Users
 }

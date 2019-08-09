@@ -1,6 +1,6 @@
 <div class="modal-content TweetstormDialog-content" role="document">
     <div class="modal-header">
-        <h3 class="modal-title" id="Tweetstorm-dialog-header">Compose new Tweet</h3>
+        <h3 class="modal-title" id="Tweetstorm-dialog-header">FriTease Tweet</h3>
     </div>
     <div class="modal-body">
         <div class="tweet-loading">
@@ -24,7 +24,10 @@
                 <div class="TweetBoxToolbar" style="">
                     <div class="TweetBoxToolbar-tweetButton">
                         <span class="buttons">
-                            <button class="SendTweetsButton EdgeButton EdgeButton--primary EdgeButton--medium js-send-tweets" type="button">
+                            <button class="SchedulePromptButton EdgeButton EdgeButton--primary EdgeButton--medium" type="button">
+                                <span class="button-text">Schedule</span>
+                            </button>
+                            <button class="PostPromptButton EdgeButton EdgeButton--primary EdgeButton--medium js-send-tweets" type="button">
                                 <span class="button-text">Tweet</span>
                             </button>
                         </span>
@@ -42,6 +45,8 @@
             <button class="SendTweetsButton EdgeButton EdgeButton--primary EdgeButton--medium js-send-tweets" type="button">
                 <span class="button-text">Post!</span>
             </button>
+            <button class="EdgeButton EdgeButton--tertiary cancel-action js-close">Cancel</button>
+            <button class="EdgeButton EdgeButton--danger delete-action">Delete</button>
         </div>
     </div>
 </div>

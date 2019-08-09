@@ -16,7 +16,7 @@ class User {
         this._profile_image_https = data.profile_image_url_https || '';
         this._profile_banner = data.profile_banner_url || '';
         this._follows = data.following || false;
-        this._ff5 = [];
+        this._ff5 = data.ff5 || [];
         this._rank = 0;
     }
 

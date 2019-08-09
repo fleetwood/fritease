@@ -80,7 +80,7 @@ const init = (app, cache) => {
             });
     });
 
-    app.get('/api/ui/modalContent', cache.route(), (req, res) => {
+    app.get('/api/ui/modalContent', (req, res) => {
         res.render('partials/modals/global-tweet', { layout: false });
     });
 

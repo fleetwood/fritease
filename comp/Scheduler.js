@@ -1,36 +1,33 @@
-const knex = require('./db/knex')
-    , utils = require('./utils')
+const utils = require('./utils')
     , moment = utils.moment
     , SMS = require('./SMS')
     , twitter = require('./twitter');
 
 const sendMessage = (message, error) => {
-    // SMS.send(message);
+    SMS.send(message);
     console.log(message);
     if (error) {
-        console.error(e.stack);
+        console.error(error.stack);
     }
 }
-
-const MMDDhhss = 'MM/DD hh:ss';
 
 class ScheduledItem {
     /**
      * A scheduled item to be triggered at a specific time.
-     * @param {moment} date Trigger date
-     * @param {String} message Sent when dueDate is past and prompt exists
-     * @param {String} notice Sent when dueDate is past and prompt does not exist
-     * @param {Function} action [Optional] Callback function
+     * @param {moment} options.date Trigger date
+     * @param {String} options.message Sent when dueDate is past and prompt exists
+     * @param {String} options.notice Sent when dueDate is past and prompt does not exist
+     * @param {Function} options.action [Optional] Callback function
      */
-    constructor(date, message, notice, action) {
-        this._dueDate = date;
-        this._message = message;
-        this._notice = notice;
-        this._action = action;
+    constructor(options) {
+        this._dueDate = options.dueDate;
+        this._message = options.message;
+        this._notice = options.notice;
+        this._action = options.action;
+        this._problems = [];
     }
 
-    get isReady() {
-        console.log(`Checking dueDate: ${moment.format(MMDDhhss)} ${s.dueDate.format(MMDDhhss)}`);
+    get isDue() {
         return moment() > this.dueDate;
     }
 
@@ -38,46 +35,55 @@ class ScheduledItem {
         return this._dueDate;
     }
 
-    action(hasPrompt) {
+    get problems() {
+        return this._problems;
+    }
+
+    set problems(val) {
+        this._problems = val;
+    }
+
+    setToNextWeek() {
+    }
+
+    complete() {
+        if (this.problems.length > 0) {
+            sendMessage(`${this._notice}\n\nISSUES:\n${JSON.stringify(this.problems)}`);
+        }
+        else {
+            if (this._action) {
+                this._action();
+            }
+            sendMessage(this._message);
+        }
+        this.problems = [];
         this._dueDate.add(1, 'w');
-        let message = hasPrompt ? this._message : this._notice;
-        sendMessage(message);
-        return this._action;
     }
 }
 
-// TODO: Needs to be automatically updating
-// 1. Determine when the next scheduled date should be (nextThursday)
-// 2. Check the database for the first incompleted post for that date
-// 2. If one is found, pass the schedules
-// 3. If their times are expired (nextThursday add(x,i))....
-    // 3a.  send SMS and execute additional actions
-    // 3b.  increment schedule date by one week
 class Scheduler {
     constructor() {
         this.scheduledTime = this.nextThursday;
-        let first = this.scheduledTime.add(8, 'h'),
-            second = first.add(16, 'h'),
-            prompt = second.add(18, 'h');
+        let first = this.nextThursday.add(8, 'h'),
+            second = this.nextThursday.add(16, 'h'),
+            prompt = this.nextThursday.add(18, 'h');
         this._schedules = [
             new ScheduledItem({
                 dueDate: first,
-                message: 'Prompt is ready!',
-                notice: 'You better schedule a prompt!!'
+                message: `Today's prompt is ready to go!`,
+                notice: `You better check on today's prompt.`
             }),
             new ScheduledItem({
                 dueDate: second,
-                message: 'Prompt is ready!',
-                notice: 'Prompt is due to go out in 2 hours. Schedule something!!'
+                message: 'Second prompt reminder. No problems detected.',
+                notice: 'Prompt is due to go out in 2 hours!!!'
             }),
             new ScheduledItem({
-                dueDate: first,
+                dueDate: prompt,
                 message: 'Posting FriTease!',
                 notice: 'FriTease is overdue!!',
                 action: () => {
-                    twitter.postScheduledPrompt(this.scheduledTime)
-                        .then(url => sendMessage(`Posted FriTease! ${url}`))
-                        .catch(e => sendMessage('WARNING: FAILED TO POST FRITEASE! BETTER SEND NOW!', e));
+                    return this.postScheduledPrompt();
                 }
             })
         ];
@@ -85,25 +91,21 @@ class Scheduler {
     }
 
     init() {
+        // check every 15 minutes
         this.watcher = setInterval(() => {
             this.watchSchedules();
-            if (this.count++ > 20) { // TODO: REMOVE DEBUG
-                console.log(`END`);
-                clearInterval(this.watcher);
-                process.exit(0);
-            }
-        }, 10000);
+        }, 1000*60*15);
     }
 
     watchSchedules() {
-        console.log(`Watching...`);
         if (!this.isThursday) {
-            // TODO
-            // return;
+            return;
         }
-        if(this._scheduledPrompt === null) {
+        if (!this._scheduledPrompt) {
             twitter.getScheduledPrompt(this.scheduledTime)
-                .then(result => this._scheduledPrompt = result)
+                .then(result => {
+                    this._scheduledPrompt = result;
+                })
                 .catch(e => sendMessage(`WARNING: There is a problem with the prompt!!`, e));
         }
         else {
@@ -112,12 +114,26 @@ class Scheduler {
     }
 
     checkSchedules() {
-        console.log('Checking schedules...')
         this._schedules.forEach(s => {
-            if (s.isReady) {
-                s.action(this._scheduledPrompt != null);
+            if (s.isDue) {
+                if (!this._scheduledPrompt) {
+                    s.problems.push('No prompt is scheduled!')
+                }
+                else if (JSON.parse(this._scheduledPrompt.ff5_users).length < 5) {
+                    s.problems.push('Need to select FF5 users!')
+                }
+                s.complete();
             }
         });
+    }
+
+    postScheduledPrompt() {
+        let date = moment(this._scheduledPrompt.date);
+        twitter.postScheduledPrompt(date)
+            .then(url => sendMessage(`Posted FriTease! ${url}`))
+            .catch(e => sendMessage('WARNING: FAILED TO POST FRITEASE! BETTER SEND NOW!', e));
+        this._scheduledPrompt = null;
+        this.scheduledTime.add(7, 'd');
     }
 
     /**
@@ -132,11 +148,8 @@ class Scheduler {
      */
     get nextThursday() {
         let thurs = utils.nextThursday(moment()).startOf('day');
-        console.log(`Next thursday ${thurs.format('MM/DD')}`);
         return thurs;
     }
 }
-
-// let schedule = new Scheduler(); // TODO: debugging
 
 module.exports = Scheduler;

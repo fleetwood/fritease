@@ -154,13 +154,14 @@ const getUsers = (options, post) => new Promise((resolve, reject) => {
  * Get all users from a JSON string and upsert them into db as ff5_users
  * @param {String} userlist Sample list: "[{"id":"123","screen_name":"john_smith", {...}}]"
  */
-const updateFF5_Users = (userlist) => {
-    let users = JSON.parse(users);
+const updateFF5_Users = (userlist, date) => {
+    let users = JSON.parse(userlist);
     let userNames = users.map(u => u.screen_name).join(',');
     twitter.get(endpoints.searchUsers, {screen_name: userNames})
-        .then(data => {
-            let users = mapUsers(data.toJson().map(f => f.user));
-            knex.updateFF5_Users(users)
+        .then(results => {
+            let users = mapUsers(results.data)
+                , FriDate = date.add(1, 'd');
+            knex.updateFF5_Users(users, FriDate)
                 .then(result => console.log(result));
         })
         .catch(e => console.log(`ERROR updating FF5_Users() ${JSON.stringify(e)}`))
@@ -182,7 +183,7 @@ const makePost = (endpoint, params) => new Promise((resolve, reject) => {
     });
 });
 
-const postPrompt = (mediaFilePath, statusText, ff5_users) => new Promise((resolve, reject) => {
+const postPrompt = (mediaFilePath, statusText) => new Promise((resolve, reject) => {
     uploadMediaChunks(utils.absolutePath(mediaFilePath))
         .then(mediaId => {
             console.log(`\tmediaId ${mediaId}`);
@@ -280,24 +281,23 @@ const uploadMediaChunks = (filename) => new Promise((resolve, reject) => {
  * @param {moment} date The date of the scheduled prompt
  */
 const postScheduledPrompt = (date) => new Promise((resolve, reject) => {
-    knex.db('ff_posts')
-        .select('*')
-        .where('date', date.format('MM/DD/YYYY'))
-        .whereIn('complete', [null, false])
-        .then(result => {
-            if (result && result[0] !== null && result[0] !== []) {
-                let scheduledPrompt = result[0];
-                postPrompt(path.join('./../public',scheduledPrompt.image, scheduledPrompt.ff5_users), scheduledPrompt.statustext)
+    getScheduledPrompt(date)
+        .then(scheduledPrompt => {
+            if (scheduledPrompt) {
+                let mediaFilePath = path.join('./../public',scheduledPrompt.image)
+                    , statusText = scheduledPrompt.statustext
+                    , ff5_users = scheduledPrompt.ff5_users;
+                postPrompt(mediaFilePath, statusText)
                     .then(postedPrompt => {
                         if (postedPrompt.id) {
                             knex.db('ff_posts')
                                 .where('id', scheduledPrompt.id)
                                 .update({
                                     complete: true,
-                                    url: postedPrompt.url
+                                    url: `https://twitter.com/johnfpendleton/status/${postedPrompt.id_str}`
                                 })
                                 .then(finish => {
-                                    updateFF5_Users(scheduledPrompt.ff5_users);
+                                    updateFF5_Users(ff5_users, date);
                                     resolve(postedPrompt);
                                 });
                         }
@@ -315,11 +315,15 @@ const postScheduledPrompt = (date) => new Promise((resolve, reject) => {
         });
 });
 
+/**
+ * Get the scheduled prompt from the database where "_>= date && complete = false_"
+ * @param {moment} date The Thursday the prompt should be posted
+ */
 const getScheduledPrompt = (date) => new Promise((resolve, reject) => {
     knex.db('ff_posts')
         .select('*')
         .where('date', '>=', date.format('MM/DD/YYYY'))
-        .where('complete', null)
+        .where('complete', false)
         .then(result => {
             resolve((result && result[0]) ? result[0] : null);
         })
@@ -341,5 +345,6 @@ module.exports = {
     postPrompt,
     postScheduledPrompt,
     twitter,
-    uploadMediaChunks
+    uploadMediaChunks,
+    updateFF5_Users
 };

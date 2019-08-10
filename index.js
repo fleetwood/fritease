@@ -110,7 +110,7 @@ if (config.knex.debug === true) {
   cache.on('message', (message) => console.log(`REDIS : ${message}`));
 }
 
-// const scheduler = new Scheduler();
+new Scheduler();
 const server = http.createServer(app);
 server.listen(config.port, null, function () {
     console.log('Express webserver configured and listening at http://localhost:' + config.port);

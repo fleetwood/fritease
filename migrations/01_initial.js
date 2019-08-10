@@ -34,8 +34,7 @@ exports.up = function (knex, Promise) {
             table.string('image');
             table.string('ff5_users');
             table.string('statustext');
-            table.boolean('complete');
-            table.boolean('notified');
+            table.boolean('complete').defaultTo(false);
             table.string('url');
             table.timestamps();
         })

@@ -197,12 +197,14 @@ const init = (app) => {
 
     // TODO: save to db
     app.get('/api/schedulePrompt', (req, res) => {
-        let date = req.query.date.split('/'),
-            options = {
+        let date = req.query.date.split('/').map(e => Number(e));
+        // subtracting a day because posting on Thursday, not Friday. pain in the ass.
+        date = utils.moment().set('m', date[0]).set('D',date[1]-1);
+        let options = {
                 image: req.query.imageUrl,
                 statustext: req.query.statusText,
                 ff5_users: req.query.ff5_users,
-                date: utils.moment().set('m', date[0]).set('D',date[1]).format(utils.dateFormats.images)
+                date: date.add(-1,'D').format(utils.dateFormats.images)
             };
         knex.saveScheduledPrompt(options)
             .then(result => {

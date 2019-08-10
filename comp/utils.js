@@ -4,6 +4,7 @@ const config = require('./config');
 const moment = require('moment');
 const fs = require('fs');
 const path = require('path');
+const sqlString = require('sqlstring');
 
 /////////////////////////////
 // PROTOTYPING
@@ -237,6 +238,7 @@ const absolutePath = (filepath) => path.join(__dirname, filepath);
 
 /**
  * @property {String} dateFormats.twitter ddd MMM DD hh:mm:ss Z YYYY
+ * @property {String} dateFormats.ff5_users YYYY-MM-DD
  * @property {String} dateFormats.fritease MMM DD, hh:mm a
  * @property {String} dateFormats.images MM/DD/YYYY
  * @property {String} dateFormats.ui MM/DD
@@ -244,6 +246,7 @@ const absolutePath = (filepath) => path.join(__dirname, filepath);
  */
 const dateFormats = {
     twitter: 'ddd MMM DD hh:mm:ss Z YYYY',
+    ff5_users: 'YYYY-MM-DD',
     fritease: 'MMM DD, hh:mm a',
     images: 'MM/DD/YYYY',
     ui: 'MM/DD'
@@ -303,6 +306,7 @@ module.exports = {
     config,
     /**
      * @property {String} dateFormats.twitter ddd MMM DD hh:mm:ss Z YYYY
+     * @property {String} dateFormats.ff5_users YYYY-MM-DD
      * @property {String} dateFormats.fritease MMM DD, hh:mm a
      * @property {String} dateFormats.images MM/DD/YYYY
      * @property {String} dateFormats.ui MM/DD
@@ -321,5 +325,6 @@ module.exports = {
     nextThursday,
     path,
     rand,
-    stringOrNull
+    stringOrNull,
+    sqlString
 }

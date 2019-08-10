@@ -32,6 +32,7 @@
     "redis": "^2.8.0",
     "request": "^2.88.0",
     "serve-favicon": "^2.5.0",
+    "sqlstring": "^2.3.1",
     "twit": "^2.2.11"
   },
   "repository": {

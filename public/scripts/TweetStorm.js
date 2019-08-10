@@ -172,7 +172,7 @@ L/RT your favorites!
                 success: (result) => {
                     showModal(false);
                     FF5.clear();
-                    FF5.dispatch(FF5.Events.notice, `Tweet scheduled!\n${params.scheduled_date}`);
+                    FF5.dispatch(FF5.Events.notice, `Tweet scheduled!\n${params.scheduled_date()}`);
                 }
             });
         });

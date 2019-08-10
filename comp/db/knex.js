@@ -1,5 +1,6 @@
 const config = require('./../config');
 var knex = require('knex')(config.knex);
+var User = require('./../../comp/twitter/User');
 
 const images = (forDate) => {
     let results = knex
@@ -55,10 +56,32 @@ const ffUsers = (where) => {
 /**
  * Iterates through all users in the list, and upserts in the db with the new FF5 date
  * @param {Array<User>} userList A collection of to update in database
+ * @param {moment} date The date that the user was FF5'ed
  * @see ./comp/twitter/User
  */
-const updateFF5_Users = (userList) => new Promise((resolve, reject) => {
-   resolve()
+const updateFF5_Users = (userList, date) => new Promise((resolve, reject) => {
+    let findUsers = userList.map(u => u.id);
+    findUsers.push(12345);
+    knex('ff_users')
+        .select('*')
+        .whereIn('id', findUsers) // TODO: remove Moira from debugging
+        .then(existingUsers => {
+            if (existingUsers.length > 0) {
+                existingUsers = existingUsers.map(e => new User(e));
+                userList.forEach(u => {
+                    let eu = existingUsers.find(f => f.screen_name === u.screen_name);
+                    if (eu) {
+                        u.addFF5(eu.ff5);
+                    }
+                });
+            }
+            userList.forEach(async u => {
+                u.addFF5(date.format('YYYY-MM-DD'));
+                await u.save()
+                    .then(result => console.log(`SAVED ${u.screenName}`))
+                    .catch(e => console.error(`ERROR saving ${u.screenName}:\n${JSON.stringify(e)}`));
+            });
+        })
    reject()
 });
 

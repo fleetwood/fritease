@@ -61,14 +61,15 @@ const ffUsers = (where) => {
  */
 const updateFF5_Users = (userList, date) => new Promise((resolve, reject) => {
     let findUsers = userList.map(u => u.id);
-    findUsers.push(12345);
     knex('ff_users')
         .select('*')
-        .whereIn('id', findUsers) // TODO: remove Moira from debugging
+        .whereIn('id', findUsers)
         .then(existingUsers => {
             if (existingUsers.length > 0) {
                 existingUsers = existingUsers.map(e => new User(e));
                 userList.forEach(u => {
+                    // find existing users and add their ff5 to userList, since 
+                    // we're going to overwrite the db entry, bc new counts n shits
                     let eu = existingUsers.find(f => f.screen_name === u.screen_name);
                     if (eu) {
                         u.addFF5(eu.ff5);

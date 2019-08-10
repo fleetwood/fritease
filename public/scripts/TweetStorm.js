@@ -120,8 +120,6 @@ L/RT your favorites!
         }
 
         this.addUser = (params) => {
-            // TODO add FF users
-            // $('.fritease-control').keyup(e => setCurrent());
             setCurrent();
         }
 

@@ -64,10 +64,16 @@ class ScheduledItem {
 class Scheduler {
     constructor() {
         this.scheduledTime = this.nextThursday;
-        let first = this.nextThursday.add(8, 'h'),
+        let wed = this.nextThursday.add(-12, 'h'),
+            first = this.nextThursday.add(8, 'h'),
             second = this.nextThursday.add(16, 'h'),
             prompt = this.nextThursday.add(18, 'h');
         this._schedules = [
+            new ScheduledItem({
+                dueDate: wed,
+                message: `Tomorrow's prompt is ready to go!`,
+                notice: `FriTease goes out tomorrow. Better get on it.`
+            }),
             new ScheduledItem({
                 dueDate: first,
                 message: `Today's prompt is ready to go!`,

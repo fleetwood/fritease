@@ -112,7 +112,7 @@ class FF5 {
      */
     static updateButtons() {
         let remaining = FF5.remaining
-            , buttons = FF5.ff5attr;
+            , buttons = FF5.ff5attr+':not(.Icon--follow)';
 
         if (remaining<1) {
             $(buttons)
@@ -121,7 +121,7 @@ class FF5 {
         }
         else {
             $(buttons)
-                .html(`Add to FF5 (${remaining})`)
+                .html(`Add (${remaining})`)
                 .parent().removeClass('disabled');
         }
     }
@@ -161,16 +161,19 @@ class FF5 {
         FF5.updateButtons();
         FF5.dispatch(FF5.Events.updated,'Storage cleared!');
     }
+
+    static FF5_User_Data(e) {
+        const t = $(e.target);
+        return {
+            user_id: Number(t.attr('data-ff5-id')), 
+            screen_name: t.attr('data-ff5-name')
+        }
+    }
     
     static init() {
         
-        $('body').on('click', '[data-ff5-id]', (e) => {
-            const t = $(e.target);
-            const data = {
-                user_id: Number(t.attr('data-ff5-id')), 
-                screen_name: t.attr('data-ff5-name')
-            }
-            FF5.add(data);
+        $('body').on('click', '.Add-FF5-User', (e) => {
+            FF5.add(FF5.FF5_User_Data(e));
         });
 
         $('body').on('click', '[data-ff5-remove-id]', (e) => {

@@ -63,7 +63,7 @@ hbs.registerHelper('gt', function (a, b, options) {
 api.init(app);
 apiUI.init(app, cache);
 
-app.get('/', cache.route({type: 'text/plain'}), (req, res) => {
+app.get('/', cache.route('index'), (req, res) => {
     res.render('index', {
       domain: req.get('host'),
       protocol: req.protocol,

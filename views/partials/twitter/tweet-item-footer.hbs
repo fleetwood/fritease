@@ -14,25 +14,24 @@
         </span>
     </span>
     <span class="ProfileTweet-action--favorite">
-        <span class="ProfileTweet-actionCount ProfileTweet-actionCount--isZero" aria-hidden="true"
-            data-tweet-stat-count="0">
+        <span class="ProfileTweet-actionCount ProfileTweet-actionCount--isZero" aria-hidden="true" data-tweet-stat-count="0">
             <span class="Icon Icon-medium Icon--heartBadge" id="profile-tweet-action-favorite-count-aria-{{id}}">
                 {{likes}} likes
             </span>
         </span>
     </span>
     <span class="ProfileTweet-action--ff5">
-        {{#if user.isFF}}
         <span class="ProfileTweet-actionCount" aria-hidden="true" data-tweet-stat-count="0">
-            <span class="Icon Icon-medium Icon--circleActiveHeart" id="profile-tweet-action-ff5-count-aria-{{id}}">
-                FF5 ({{user.ff5.length}})
+            <span class="Icon Icon-medium Icon--circleActiveHeart" id="profile-tweet-action-ff5-count-aria-{{id}}" style="color: #006dbf ">
+                {{user.ff5.length}} FF5
             </span>
         </span>
-        {{else}}
-        <span class="ProfileTweet-actionCount ProfileTweet-actionCount--isZero" aria-hidden="true"
-            data-tweet-stat-count="0">
-            <span class="Icon Icon-medium Icon--follow" id="profile-tweet-action-ff5-count-aria-{{id}}">FF5</span>
+    </span>
+    <span class="ProfileTweet-action--more">
+        <span class="ProfileTweet-actionCount" aria-hidden="true" data-tweet-stat-count="0">
+            <span class="Add-FF5-User Icon Icon-medium Icon--follow" data-ff5-id="{{user.id}}" data-ff5-name="{{user.screenName}}" style="color: #311118">
+                Add to FF5
+            </span>
         </span>
-        {{/if}}
     </span>
 </div>

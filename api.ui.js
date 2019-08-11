@@ -91,9 +91,11 @@ const init = (app, cache) => {
         };
         twitter.getUser(req.query)
             .then(user => {
-                res.render(layout.success, {
-                    user,
-                    layout: false
+                user.getFF5().then(() => {
+                    res.render(layout.success, {
+                        user,
+                        layout: false
+                    });
                 });
             })
             .catch(e => {

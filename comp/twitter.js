@@ -86,9 +86,11 @@ const mapUsers = (data, limit = -1) => {
 }
 
 const friTease = (options) => new Promise((resolve, reject) => {
+    // TODO: convert to endpoint, include next in query
     utils.getFile(path.join(__dirname, searchTweets))
         .then(data => {
-            resolve(mapStatuses(data.toJson()));
+            data = JSON.parse(data);
+            resolve({...data, ...{results: mapStatuses(data.results)}});
         })
         .catch(e => reject(e));
     // TODO: return endpoints
@@ -123,7 +125,8 @@ const getUserList = (options, post) => new Promise((resolve, reject) => {
     // TODO: This should pull from twitter API
     utils.getFile(path.join(__dirname, searchTweets))
         .then(data => {
-            let users = data.toJson().map(f => f.user);
+            data = JSON.parse(data);
+            let users = data.results.map(f => f.user);
             users = mapUsers(users, 20);
             users = users.dedupe('id');
             resolve(users);

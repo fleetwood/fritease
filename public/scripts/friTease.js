@@ -5,9 +5,13 @@ $(document).ready(function () {
     const urlParams = {};
     new URLSearchParams(window.location.search).forEach((v,k) => urlParams[k]=v);
 
-    const render = (content) => {
-        streamContent.html(content);
+    const render = (content, next = false) => {
         loadVisibility(false);
+        if (next) {
+            streamContent.append(content);
+            return;
+        }
+        streamContent.html(content);
     }
 
     const formats ={
@@ -31,23 +35,30 @@ $(document).ready(function () {
         set[1].addClass(hidden);
     }
         
-    const getStream = () => {
+    const getStream = (next = false) => {
         loadVisibility(true);
         $.ajax({
             url: "api/ui/friTease",
             data: {
                 ...urlParams,
                 friTease: true,
-                retweets: false
+                retweets: false,
+                next
             },
             error: (err) => {
                 render(err.statusText);
             },
             success: (result) => {
-                render(result);
+                render(result, next);
             }
         });
     }
+
+    $('body').on('click', '#more-tweets', (e) => {
+        console.log($(e.currentTarget).attr('data-next'));
+        getStream($(e.currentTarget).attr('data-next'));
+        $(e.currentTarget).remove();
+    });
 
     getStream();
 });

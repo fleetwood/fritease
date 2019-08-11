@@ -105,11 +105,13 @@ const init = (app, cache) => {
     app.get('/api/ui/friTease', cache.route('/api/ui/friTease'), (req, res) => {
         friTease(req, cache)
             .then((stream) => {
-                Promise.all(stream.map(async s => await s.user.getFF5()))
+                Promise.all(stream.results.map(async s => await s.user.getFF5()))
                     .then(() => {
                         res.render('partials/stream', {
-                            stream,
-                            count: stream.length,
+                            stream: stream.results,
+                            next: stream.next,
+                            showNext: stream.next ? true : false,
+                            count: stream.results.length,
                             layout: false
                         })
                     });

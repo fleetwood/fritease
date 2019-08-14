@@ -186,7 +186,7 @@ const makePost = (endpoint, params) => new Promise((resolve, reject) => {
     });
 });
 
-const postPrompt = (mediaFilePath, statusText) => new Promise((resolve, reject) => {
+const postPrompt = (mediaFilePath, statusText, ff5_users) => new Promise((resolve, reject) => {
     uploadMediaChunks(utils.absolutePath(mediaFilePath))
         .then(mediaId => {
             console.log(`\tmediaId ${mediaId}`);
@@ -197,6 +197,7 @@ const postPrompt = (mediaFilePath, statusText) => new Promise((resolve, reject) 
             makePost(endpoints.postTweet, status)
                 .then(result => {
                     console.log(`SUCCESS!`);
+                    updateFF5_Users(ff5_users, utils.moment())
                     resolve(result);
                 })
         })

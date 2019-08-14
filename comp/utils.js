@@ -1,8 +1,10 @@
 /////////////////////////////
 // REQUIRES
+const config = require('./config');
 const moment = require('moment');
 const fs = require('fs');
 const path = require('path');
+const sqlString = require('sqlstring');
 
 /////////////////////////////
 // PROTOTYPING
@@ -130,7 +132,7 @@ if (isUndefined(Array.limit)) {
 
 if(isUndefined(fs.readFileAsync)) {
     // make Promise version of fs.readFile()
-    fs.readFileAsync = function (filename, enc) {
+    fs.readFileAsync = function (filename, enc = 'utf8') {
         return new Promise(function (resolve, reject) {
             fs.readFile(filename, enc, function (err, data) {
                 if (err)
@@ -232,8 +234,11 @@ const emoji = {
     check: '✔'
 };
 
+const absolutePath = (filepath) => path.join(__dirname, filepath);
+
 /**
  * @property {String} dateFormats.twitter ddd MMM DD hh:mm:ss Z YYYY
+ * @property {String} dateFormats.ff5_users YYYY-MM-DD
  * @property {String} dateFormats.fritease MMM DD, hh:mm a
  * @property {String} dateFormats.images MM/DD/YYYY
  * @property {String} dateFormats.ui MM/DD
@@ -241,6 +246,7 @@ const emoji = {
  */
 const dateFormats = {
     twitter: 'ddd MMM DD hh:mm:ss Z YYYY',
+    ff5_users: 'YYYY-MM-DD',
     fritease: 'MMM DD, hh:mm a',
     images: 'MM/DD/YYYY',
     ui: 'MM/DD'
@@ -280,10 +286,32 @@ const nextFriday = (date) => {
     return date;
 }
 
+/**
+ * 
+ * @param {Moment} date Starting date
+ * @returns {Moment} If _date_ is not a Thursday, returns the next following Thursday
+ */
+const nextThursday = (date) => {
+    while(date.day() !== 4) {
+        date.add(1, 'd');
+    }
+    return date;
+}
+
 const log = (str) => console.log(str);
 
 module.exports = {
+    absolutePath,
     asNum,
+    config,
+    /**
+     * @property {String} dateFormats.twitter ddd MMM DD hh:mm:ss Z YYYY
+     * @property {String} dateFormats.ff5_users YYYY-MM-DD
+     * @property {String} dateFormats.fritease MMM DD, hh:mm a
+     * @property {String} dateFormats.images MM/DD/YYYY
+     * @property {String} dateFormats.ui MM/DD
+     * @description For formatting dates.   
+     */
     dateFormats,
     emoji,
     fs,
@@ -294,7 +322,9 @@ module.exports = {
     log,
     moment,
     nextFriday,
+    nextThursday,
     path,
     rand,
-    stringOrNull
+    stringOrNull,
+    sqlString
 }

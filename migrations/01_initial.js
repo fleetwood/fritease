@@ -26,6 +26,17 @@ exports.up = function (knex, Promise) {
             table.string('theme1');
             table.string('theme2');
             table.timestamps();
+        }),
+
+        knex.schema.createTable('ff_posts', function(table){
+            table.increments('id').primary();
+            table.date('date').unique();
+            table.string('image');
+            table.string('ff5_users');
+            table.string('statustext');
+            table.boolean('complete').defaultTo(false);
+            table.string('url');
+            table.timestamps();
         })
     ])
 };
@@ -33,6 +44,7 @@ exports.up = function (knex, Promise) {
 exports.down = function (knex, Promise) {
     return Promise.all([
         knex.schema.dropTable('ff_users'),
-        knex.schema.dropTable('images')
-    ])
+        knex.schema.dropTable('ff_images'),
+        knex.schema.dropTable('ff_posts')
+    ]);
 };

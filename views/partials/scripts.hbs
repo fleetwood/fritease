@@ -17,7 +17,7 @@
             url: '/api/ui/todolist'
         }).getStream();
         
-        $('#Tweetstorm-dialog').tweetStorm({
+        const tweetStorm = $('#Tweetstorm-dialog').tweetStorm({
             modalUrl: '/api/ui/modalContent',
             imageUrl: '/api/ui/modalImage',
             contentContainer: '#Tweetstorm-dialog-dialog',
@@ -33,5 +33,6 @@
         });
 
         FF5.init();
+
     });
 </script>

@@ -24,49 +24,28 @@ class FF5 {
      * @param {String} message Attach a message to the event
      * @see cref:Events
      */
-    static dispatch(event, message) {
-        document.dispatchEvent(new CustomEvent(event, {bubbles:true, detail: {message}}));
+    static dispatch(event, detail) {
+        document.dispatchEvent(new CustomEvent(event, {bubbles:true, detail}));
     }
 
     /**
      * @property {CustomEvent} Events.updated 'When a user is added to or removed from FF5'
      * @property {CustomEvent} Events.notice "A notice or error from FF5"
+     * @property {CustomEvent} Events.user.added "A user was added"
+     * @property {CustomEvent} Events.user.removed "A user was removed"
      */
     static Events = {
         updated: 'ff5-updated',
-        notice: 'ff5-notice'
+        notice: 'ff5-notice',
+        user: {
+            added: 'ff5-user-added',
+            removed: 'ff5-user-removed'
+        }
     }
 
     /**
      * 
-     * @param {Object} data The user's id and screen_name, bc Twitter is unreliable
-     * @param {Number} data.user_id The user's twitter id
-     * @param {String} data.screen_name The user's screen_name
-     */
-    static add(data) {
-        if (sessionStorage.length >= 5) {
-            FF5.dispatch(FF5.Events.notice,'Already five items in storage!');
-            return;
-        }
-        if (FF5.get(data.user_id)) {
-            FF5.dispatch(FF5.Events.notice,'That user has already been added!');
-            return;
-        }
-        $.ajax({
-            url: '/api/user',
-            data,
-            error: (err) => FF5.dispatch(FF5.Events.notice,err),
-            success: (result) => {
-                sessionStorage.setItem(result.id, JSON.stringify(result));
-                FF5.updateButtons();
-                FF5.dispatch(FF5.Events.updated,'Added user!');
-            }
-        });
-    }
-
-    /**
-     * 
-     * @param {Number} id The user id to remove from storage (Strings will be converted to Number)
+     * @param {Number} id Select a user from storage by id (Strings will be converted to Number)
      */
     static get(id) {
         let result = sessionStorage.getItem(id);
@@ -80,16 +59,51 @@ class FF5 {
      * 
      * @param {Object} data The user's id and screen_name, bc Twitter is unreliable
      * @param {Number} data.user_id The user's twitter id
+     * @param {String} data.screen_name The user's screen_name
+     */
+    static add(data) {
+        if (sessionStorage.length >= 5) {
+            FF5.dispatch(FF5.Events.notice,{message: 'Already five items in storage!'});
+            return;
+        }
+        if (FF5.get(data.user_id)) {
+            FF5.dispatch(FF5.Events.notice,{message: 'That user has already been added!'});
+            return;
+        }
+        $.ajax({
+            url: '/api/user',
+            data,
+            error: (err) => FF5.dispatch(FF5.Events.notice,{message: JSON.stringify(err)}),
+            success: (result) => {
+                sessionStorage.setItem(result.id, JSON.stringify(result));
+                FF5.updateButtons();
+                FF5.dispatch(FF5.Events.updated, {message: `<b>${result.name}</b> added!`, type: FF5.Events.user.added, id: result.id});
+            }
+        });
+    }
+
+    /**
+     * 
+     * @param {Object} data The user's id and screen_name, bc Twitter is unreliable
+     * @param {Number} data.user_id The user's twitter id
      * @param {String} data.screen_name The user's screen_name (Not used)
      */
     static remove(data) {
         if (FF5.get(data.user_id)) {
-            sessionStorage.removeItem(data.user_id);
-            FF5.updateButtons();
-            FF5.dispatch(FF5.Events.updated,'User removed!');
+            
+        $.ajax({
+            url: '/api/user',
+            data,
+            error: (err) => FF5.dispatch(FF5.Events.notice,{message: JSON.stringify(err)}),
+            success: (result) => {
+                sessionStorage.removeItem(data.user_id);
+                FF5.updateButtons();
+                FF5.dispatch(FF5.Events.updated,{ message: `<b>${result.name}</b> removed!`, type: FF5.Events.user.added, id: result.id});
+            }
+        });
         }
         else {
-            FF5.dispatch(FF5.Events.notice, `User ${data.user_id} not found.`);
+            FF5.dispatch(FF5.Events.notice, {message: `User ${data.user_id} not found.`});
         }
     }
 
@@ -112,7 +126,7 @@ class FF5 {
      */
     static updateButtons() {
         let remaining = FF5.remaining
-            , buttons = FF5.ff5attr;
+            , buttons = FF5.ff5attr+':not(.Icon--follow)';
 
         if (remaining<1) {
             $(buttons)
@@ -121,7 +135,7 @@ class FF5 {
         }
         else {
             $(buttons)
-                .html(`Add to FF5 (${remaining})`)
+                .html(`Add (${remaining})`)
                 .parent().removeClass('disabled');
         }
     }
@@ -139,23 +153,41 @@ class FF5 {
     }
 
     /**
+     * Get all objects in a semi-colon separated string, ex "_{id:123,user_name:sue};{...}_"
+     */
+    static get asString() {
+        let all = [];
+        for (var i = 0; i < sessionStorage.length; i++){
+            let item = sessionStorage.getItem(sessionStorage.key(i));
+            all.push(item);
+        }
+        return JSON.stringify(all.map(u => {
+            let t = JSON.parse(u);
+            return {id: t.id, screen_name: t.screen_name};
+        }));
+    }
+
+    /**
      * @function clear Removes all items from FF5 sessionStorage
      */
     static clear() {
         sessionStorage.clear();
         FF5.updateButtons();
-        FF5.dispatch(FF5.Events.updated,'Storage cleared!');
+        FF5.dispatch(FF5.Events.updated,{message: 'Storage cleared!'});
+    }
+
+    static FF5_User_Data(e) {
+        const t = $(e.target);
+        return {
+            user_id: Number(t.attr('data-ff5-id')), 
+            screen_name: t.attr('data-ff5-name')
+        }
     }
     
     static init() {
         
-        $('body').on('click', '[data-ff5-id]', (e) => {
-            const t = $(e.target);
-            const data = {
-                user_id: Number(t.attr('data-ff5-id')), 
-                screen_name: t.attr('data-ff5-name')
-            }
-            FF5.add(data);
+        $('body').on('click', '.Add-FF5-User', (e) => {
+            FF5.add(FF5.FF5_User_Data(e));
         });
 
         $('body').on('click', '[data-ff5-remove-id]', (e) => {

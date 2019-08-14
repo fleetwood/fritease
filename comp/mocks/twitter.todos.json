@@ -1,7 +1,22 @@
 {
     "title": "To Dos",
-    "footer": "Reload",
+    "footer": "Do the things yall",
     "list": [
+        {
+            "title": "Post Prompt",
+            "description": [
+                "Scheduler.",
+                "Pull users from db entry into FF5 session."
+            ]
+        },
+        {
+            "title": "FF5",
+            "description": [
+                "Disable Add buttons for users already in FF5.",
+                "Update Profile to include FF5 history."
+            ],
+            "footer": "FF5 Tweaks. Low Priority."
+        },
         {
             "title": "Prompt Designer",
             "description": [
@@ -19,26 +34,11 @@
             "footer": "Build out the prompt designer"
         },
         {
-            "title": "FF5",
-            "description": [
-                "Disable Add buttons for users already in FF5.",
-                "Remove Clear button if Empty.",
-                "Update Template to include user info."
-            ],
-            "footer": "FF5 Tweaks. Low Priority."
-        },
-        {
             "title": "Sorter",
             "description": [
                 "Sort the stream by certain properties."
             ],
             "footer": "Date, User Rank, Likes/Retweets"
-        },
-        {
-            "title": "Post Prompt",
-            "description": [
-                "Schedule and send!"
-            ]
         },
         {
             "title": "Pub-Sub",

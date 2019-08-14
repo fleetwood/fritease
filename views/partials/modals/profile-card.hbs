@@ -35,16 +35,14 @@
             <span class="visuallyhidden">{{user.screenName}}</span>
             <img src="{{user.profileImage}}" alt="" class="ProfileCard-avatarImage js-action-profile-avatar">
         </a>
+
         <div class="ProfileCard-actions">
-            <div class="UserActions   UserActions--small u-textLeft">
+            <div class="UserActions UserActions--small u-textLeft">
                 {{#if user.isFF}}
-                    <button type="button" class="EdgeButton EdgeButton--secondary EdgeButton--small button-text follow-text">
-                {{else}}
-                    <button type="button" class="EdgeButton EdgeButton--primary EdgeButton--small button-text unfollow-text">
                 {{/if}}
-                        <span aria-hidden="true" data-ff5-id="{{user.id}}" data-ff5-name="{{user.screenName}}">Add to FF5</span>
-                        <span class="u-hiddenVisually">Add to FF5 <span class="username u-dir u-textTruncate" dir="ltr">@<b>{{user.screenName}}</b></span></span>
-                    </button>
+                <button type="button" class="Add-FF5-User EdgeButton EdgeButton--primary EdgeButton--small button-text unfollow-text">
+                    <span aria-hidden="true" data-ff5-id="{{user.id}}" data-ff5-name="{{user.screenName}}">Add to FF5</span>
+                </button>
             </div>
         </div>
 
@@ -52,59 +50,52 @@
             <div class="ProfileCard-userFields">
                 <div class="ProfileNameTruncated account-group">
                     <div class="u-textTruncate u-inlineBlock">
-                        <a class="fullname ProfileNameTruncated-link u-textInheritColor js-nav" href="/{{user.screenName}}"
-                            data-aria-label-part="" data-send-impression-cookie="true">
-                            {{user.screenName}}</a></div><span class="UserBadges"></span>
+                        <a class="fullname ProfileNameTruncated-link u-textInheritColor js-nav" href="/{{user.screenName}}" data-aria-label-part="" data-send-impression-cookie="true">{{user.screenName}}</a>
+                    </div>
+                    <span class="UserBadges"></span>
                 </div>
                 <div class="ProfileCard-screenname">
-                    <a href="/{{user.screenName}}" class="ProfileCard-screennameLink u-linkComplex js-nav"
-                        data-aria-label-part="" data-send-impression-cookie="true">
+                    <a href="/{{user.screenName}}" class="ProfileCard-screennameLink u-linkComplex js-nav" data-aria-label-part="" data-send-impression-cookie="true">
                         <span class="username u-dir" dir="ltr">@<b class="u-linkComplex-target">{{user.screenName}}</b></span>
                     </a>
-
                 </div>
-
             </div>
 
             <div class="bio-container">
                 <p class="bio profile-field u-dir" dir="ltr">{{user.description}}</p>
             </div>
-
-
         </div>
         
         <div class="ProfileCardStats">
             <ul class="ProfileCardStats-statList Arrange Arrange--bottom Arrange--equal">
                 <li class="ProfileCardStats-stat Arrange-sizeFit">
-                    <a class="ProfileCardStats-statLink u-textUserColor u-linkClean u-block js-nav js-tooltip"
-                        title="{{user.rank}} Rank" href="/{{user.screenName}}" data-element-term="follower_stats"
-                        data-send-impression-cookie="true">
+                    <a class="ProfileCardStats-statLink u-textUserColor u-linkClean u-block js-nav js-tooltip" title="{{user.rank}} Rank" href="/{{user.screenName}}" data-element-term="follower_stats" data-send-impression-cookie="true">
                         <span class="ProfileCardStats-statLabel u-block">Rank</span>
                         <span class="ProfileCardStats-statValue" data-count="{{user.rank}}" data-is-compact="false">{{user.rank}}</span>
                     </a>
                 </li>
                 <li class="ProfileCardStats-stat Arrange-sizeFit">
-                    <a class="ProfileCardStats-statLink u-textUserColor u-linkClean u-block js-nav js-tooltip"
-                        title="{{user.tweets}} Tweets" href="/{{user.screenName}}" data-element-term="tweet_stats"
-                        data-send-impression-cookie="true">
+                    <a class="ProfileCardStats-statLink u-textUserColor u-linkClean u-block js-nav js-tooltip" title="{{user.tweets}} Tweets" href="/{{user.screenName}}" data-element-term="tweet_stats" data-send-impression-cookie="true">
                         <span class="ProfileCardStats-statLabel u-block">Tweets</span>
                         <span class="ProfileCardStats-statValue" data-count="{{user.tweets}}" data-is-compact="false">{{user.ui.tweets}}</span>
                     </a>
                 </li>
                 <li class="ProfileCardStats-stat Arrange-sizeFit">
-                    <a class="ProfileCardStats-statLink u-textUserColor u-linkClean u-block js-nav js-tooltip"
-                        title="{{user.followers}} Followers" href="/{{user.screenName}}/followers" data-element-term="follower_stats"
-                        data-send-impression-cookie="true">
+                    <a class="ProfileCardStats-statLink u-textUserColor u-linkClean u-block js-nav js-tooltip" title="{{user.followers}} Followers" href="/{{user.screenName}}/followers" data-element-term="follower_stats" data-send-impression-cookie="true">
                         <span class="ProfileCardStats-statLabel u-block">Followers</span>
                         <span class="ProfileCardStats-statValue" data-count="{{user.followers}}" data-is-compact="false">{{user.ui.followers}}</span>
                     </a>
                 </li>
                 <li class="ProfileCardStats-stat Arrange-sizeFit">
-                    <a class="ProfileCardStats-statLink u-textUserColor u-linkClean u-block js-nav js-tooltip"
-                        title="{{user.friends}} Followers" href="/{{user.screenName}}/followers" data-element-term="follower_stats"
-                        data-send-impression-cookie="true">
+                    <a class="ProfileCardStats-statLink u-textUserColor u-linkClean u-block js-nav js-tooltip" title="{{user.friends}} Followers" href="/{{user.screenName}}/followers" data-element-term="follower_stats" data-send-impression-cookie="true">
                         <span class="ProfileCardStats-statLabel u-block">Following</span>
                         <span class="ProfileCardStats-statValue" data-count="{{user.friends}}" data-is-compact="false">{{user.ui.friends}}</span>
+                    </a>
+                </li>
+                <li class="ProfileCardStats-stat Arrange-sizeFit">
+                    <a class="ProfileCardStats-statLink u-textUserColor u-linkClean u-block js-nav js-tooltip" title="{{user.friends}} Followers" href="/{{user.screenName}}/followers" data-element-term="follower_stats" data-send-impression-cookie="true">
+                        <span class="ProfileCardStats-statLabel u-block">FF5</span>
+                        <span class="ProfileCardStats-statValue" data-count="{{user.ff5.length}}" data-is-compact="false">{{user.ff5.length}}</span>
                     </a>
                 </li>
             </ul>

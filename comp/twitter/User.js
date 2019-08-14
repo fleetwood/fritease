@@ -1,8 +1,12 @@
 const utils = require('./../utils');
-const knex = require('./../db/knex');
 
 class User {
     constructor(data) {
+        let ff5 = data.ff5 
+            ? data.ff5 
+            : data.ff_dates // from db
+                ? data.ff_dates.dates
+                : [];
         this.data = data;
         this._id = data.id || -1;
         this._name = data.name || '';
@@ -16,8 +20,9 @@ class User {
         this._profile_image_https = data.profile_image_url_https || '';
         this._profile_banner = data.profile_banner_url || '';
         this._follows = data.following || false;
-        this._ff5 = [];
+        this._ff5 = ff5;
         this._rank = 0;
+        this.knex = require('./../db/knex');
     }
 
     get id() {
@@ -39,7 +44,7 @@ class User {
     get followers() {
         return this._followers || -1;
     }
-    
+
     get friends() {
         return this._friends || -1;
     }
@@ -68,7 +73,7 @@ class User {
             tweets: this.tweets.twitterFormat()
         }
     }
-    
+
     get profileImage() {
         return this._profile_image || '';
     }
@@ -86,7 +91,7 @@ class User {
     }
 
     get isFF() {
-        return this._ff5.length>0;
+        return this._ff5.length > 0;
     }
 
     get ff5() {
@@ -95,8 +100,8 @@ class User {
 
     get rank() {
         let rank = this._rank;
-        if (this.followers>0) rank += Math.floor(this.followers/1000);
-        if (this.tweets>0) rank += Math.floor(this.tweets/1000);
+        if (this.followers > 0) rank += Math.floor(this.followers / 1000);
+        if (this.tweets > 0) rank += Math.floor(this.tweets / 1000);
         return rank;
     }
 
@@ -115,19 +120,50 @@ class User {
 
     getFF5() {
         return new Promise((resolve, reject) => {
-            knex.ffUsers({'id':this._id})
+            this.knex.ffUsers({ 'id': this._id })
                 .then(u => {
-                    if(u && u.length > 0) {
+                    if (u && u.length > 0) {
                         this.addFF5(u[0].ff_dates.dates);
                     }
                     resolve();
                 })
                 .catch(e => reject(e));
-            });
+        });
+    }
+
+    mapToDb() {
+        const ff5 = this.ff5.map(u => utils.moment(u).format(utils.dateFormats.ff5_users))
+        return {
+            id: this.id,
+            name: this.name,
+            screen_name: this.screenName,
+            follows: this.follows,
+            tweets: this.statuses_count,
+            followers: this.followers,
+            friends: this.friends,
+            likes: this.liked,
+            description: this.description,
+            profile_image: this.profileImage,
+            profile_banner: this.profileBanner,
+            ft_retweets: 0,
+            ft_tweets: 0,
+            ff_dates: JSON.stringify({dates: ff5})
+        }
     }
 
     save() {
-        //todo: write to db
+        return new Promise((resolve, reject) => {
+            this.knex.ffUsers({ 'id': this.id })
+                .then(result => {
+                    let query = result.length > 0
+                        ? this.knex.db('ff_users').where({ 'id': this.id }).update(this.mapToDb()).toString()
+                        : this.knex.db('ff_users').insert(this.mapToDb()).toString();
+                    this.knex.db.raw(query)
+                        .then(finish => resolve(finish))
+                        .catch(e => reject(e));
+                })
+                .catch(e => reject(e));
+        });
     }
 }
 

@@ -13,7 +13,7 @@
             limit: 10
         }, options);
 
-        const render = (val) => {
+        const render = (val, options) => {
             this.html(val);
             show(true);
             OnRender.watchRender(FF5.ff5attr, () => {
@@ -63,7 +63,7 @@
                 url: settings.url,
                 data: { ...options },
                 error: (err) => render(err.statusText),
-                success: (result) => render(result)
+                success: (result) => render(result, options)
             });
         }
 

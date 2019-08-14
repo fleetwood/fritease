@@ -76,8 +76,14 @@ class FF5 {
             error: (err) => FF5.dispatch(FF5.Events.notice,{message: JSON.stringify(err)}),
             success: (result) => {
                 sessionStorage.setItem(result.id, JSON.stringify(result));
-                FF5.updateButtons();
-                FF5.dispatch(FF5.Events.updated, {message: `<b>${result.name}</b> added!`, type: FF5.Events.user.added, id: result.id});
+                FF5.dispatch(FF5.Events.updated, {
+                    message: `<b>${result.name}</b> added!`,
+                    type: FF5.Events.user.added,
+                    user: {
+                        user_id: result.id,
+                        screen_name: result.screen_name
+                    }
+                });
             }
         });
     }
@@ -97,8 +103,14 @@ class FF5 {
             error: (err) => FF5.dispatch(FF5.Events.notice,{message: JSON.stringify(err)}),
             success: (result) => {
                 sessionStorage.removeItem(data.user_id);
-                FF5.updateButtons();
-                FF5.dispatch(FF5.Events.updated,{ message: `<b>${result.name}</b> removed!`, type: FF5.Events.user.added, id: result.id});
+                FF5.dispatch(FF5.Events.updated,{
+                    message: `<b>${result.name}</b> removed!`,
+                    type: FF5.Events.user.removed,
+                    user: {
+                        user_id: result.id,
+                        screen_name: result.screen_name
+                    }
+                });
             }
         });
         }
@@ -124,19 +136,20 @@ class FF5 {
     /**
      * @description Updates all buttons on screen with an attribute of _data-ff5-id_
      */
-    static updateButtons() {
-        let remaining = FF5.remaining
-            , buttons = FF5.ff5attr+':not(.Icon--follow)';
+    static updateButtons(event) {
+        let remaining = FF5.remaining;
+            // , buttons = FF5.ff5attr+':not(.Icon--follow)';
 
-        if (remaining<1) {
-            $(buttons)
-                .html(`FF5 FULL (${remaining})`)
-                .parent().addClass('disabled');
-        }
-        else {
-            $(buttons)
-                .html(`Add (${remaining})`)
-                .parent().removeClass('disabled');
+        if (event && event.detail.type) {
+            let find = (`[${FF5.ff5tag}="${event.detail.user.user_id}"]`);
+            switch (event.detail.type) {
+                case FF5.Events.user.added:
+                    $(find).html('Added');
+                    break;
+                case FF5.Events.user.removed:
+                    $(find).html('Add to FF5');
+                    break;
+            }
         }
     }
 
@@ -172,7 +185,6 @@ class FF5 {
      */
     static clear() {
         sessionStorage.clear();
-        FF5.updateButtons();
         FF5.dispatch(FF5.Events.updated,{message: 'Storage cleared!'});
     }
 
@@ -207,6 +219,7 @@ class FF5 {
         });
 
         document.addEventListener(FF5.Events.updated,(e) => {
+            FF5.updateButtons(e);
             OnRender.showAlert({title: 'FF5 updated.', message: e.detail.message, type: 'success'});
         });
 

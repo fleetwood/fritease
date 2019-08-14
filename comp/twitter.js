@@ -34,6 +34,7 @@ const twitter = new Twit({
  */
 const endpoints = {
     searchTweets: 'search/tweets',
+    thirtyday: 'tweets/search/30day/dev',
     fullArchive: 'tweets/search/fullarchive/dev',
     searchUsers: 'users/lookup',
     getUser: 'users/show',
@@ -87,15 +88,24 @@ const mapUsers = (data, limit = -1) => {
 
 const friTease = (options) => new Promise((resolve, reject) => {
     // TODO: convert to endpoint, include next in query
-    utils.getFile(path.join(__dirname, searchTweets))
-        .then(data => {
-            data = JSON.parse(data);
-            resolve({...data, ...{results: mapStatuses(data.results)}});
-        })
-        .catch(e => reject(e));
+    // utils.getFile(path.join(__dirname, searchTweets))
+    //     .then(data => {
+    //         data = JSON.parse(data);
+    //         resolve({...data, ...{results: mapStatuses(data.results)}});
+    //     })
+    //     .catch(e => reject(e));
     // TODO: return endpoints
-    // const query = new Query(options).FriTease();
-    // return twitter.get(endpoints.searchTweets, query.toQuery());
+    const query = new Query(options).FriTease();
+    twitter.post(endpoints.searchTweets, {query: 'FriTease'})
+        .then(data => {
+            let statuses = JSON.parse(data);
+            let results = mapStatuses(statuses.results);
+            let final = {...data, ...results};
+            resolve(final);
+        })
+        .catch(e => {
+            reject(e);
+        });
 });
 
 /**

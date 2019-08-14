@@ -98,6 +98,9 @@ if (isUndefined(Array.sortBy)) {
 }
 
 if (isUndefined(Array.dedupe)) {
+    /**
+     * @param {string} prop The property to compare against.
+     */
     Object.defineProperty(Array.prototype, 'dedupe', {
         value(prop) {
             const removeDuplicates = (myArr, prop) => {

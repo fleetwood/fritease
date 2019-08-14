@@ -1,7 +1,5 @@
-include mixins/modals
 include mixins/navbar
 include mixins/search_nav
-include mixins/sidebar
 
 doctype html
 html
@@ -15,24 +13,25 @@ html
     link(rel="preload", href="/js/tw.init.en.js", as="script")
     link(rel="preload", href="/js/tw.commons.en.js", as="script")
 
-  body.three-col.logged-in.user-style-johnfpendleton.ms-windows.AdaptiveSearchPage.AdaptiveDefaultPage.no-nav-banners.supports-drag-and-drop.buffer-twitter
-    #doc
+  body.logged-in.user-style-johnfpendleton.ms-windows.NotificationsPage.no-nav-banners.supports-drag-and-drop.buffer-twitter
+    #doc.route-connect
       +navbar
+      +search_nav
       #page-outer
-        #page-container.AppContent.wrapper-search
-          +search_nav
+        #page-container.AppContent.wrapper.wrapper-connect
+          block alert
           .AppContainer
             .AppContent-main.u-cf
               .Grid.Grid--with-gutter
               
                 .Grid-cell.u-size1of3.u-lg-size1of4
-                  +sidebar
+                  .SidebarCommonModules
                   
                 .Grid-cell.u-size2of3.u-lg-size3of4
                   .Grid.Grid--with-gutter
                     .Grid-cell.u-size2of2.u-lg-size2of3
                         block content
-      +modals
+
     script(src='js/jquery.min.js')
     script(src='js/boostrap.min.js')
     script(src='js/alert.min.js')

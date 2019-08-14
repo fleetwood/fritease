@@ -4,7 +4,7 @@ const Twit = require('twit');
 const config = require('config').get('twitter');
 
 const T = new Twit(config);
-const params = { q: '#FriTease johnfpendleton', count: 10 } 
+const params = { q: '#FriTease', count: 10 } 
 
 const searchedData = (err, data, response) => {
  return `Here's your data yall`;

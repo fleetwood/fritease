@@ -1,0 +1,19 @@
+knex.schema.createTable('users', function(table){
+    table.bigint('id').primary();
+    table.string('name').notNullable();
+    table.string('screen_name').notNullable();
+    table.datetime("created_at");
+    table.string('url');
+    table.string('description').notNullable();
+    table.int('followers_count');
+    table.int('friends_count');
+    table.int('listed_count');
+    table.int('favourites_count');
+    table.int('statuses_count');
+    table.string('profile_background_image_url');
+    table.string('profile_background_image_url_https');
+    table.string('profile_image_url');
+    table.string('profile_image_url_https');
+    table.string('profile_banner_url');
+    table.string('following').defaultTo(false);
+});

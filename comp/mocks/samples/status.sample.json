@@ -1,0 +1,293 @@
+{
+    "results": [
+        {
+            "created_at": "Mon Aug 12 04:23:03 +0000 2019",
+            "id": 1160768636543471616,
+            "id_str": "1160768636543471616",
+            "text": "RT @jenw0114: I'm enthralled\nBy what's beautiful \nBeyond skin deep\nAnd Intoxicated\nBy what's sensual \nArouses me widely \nSuch as\nYour encha…",
+            "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+            "truncated": false,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "in_reply_to_screen_name": null,
+            "user": {
+                "id": 1349669078,
+                "id_str": "1349669078",
+                "name": "Robert Mihaly 🇫🇷",
+                "screen_name": "RobertMihaly1",
+                "location": "Ohio, USA",
+                "url": "http://artifiswordpresscom.wordpress.com",
+                "description": "Poetry © / Published: The Wood Knots / sculpture & ceramics / music = love / Cleveland Indians / GOP begone / https://t.co/Xm1bi5KEfp /   Love for Paris",
+                "translator_type": "none",
+                "protected": false,
+                "verified": false,
+                "followers_count": 7417,
+                "friends_count": 7195,
+                "listed_count": 374,
+                "favourites_count": 152676,
+                "statuses_count": 213700,
+                "created_at": "Sat Apr 13 16:32:44 +0000 2013",
+                "utc_offset": null,
+                "time_zone": null,
+                "geo_enabled": true,
+                "lang": null,
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "C6E2EE",
+                "profile_background_image_url": "http://abs.twimg.com/images/themes/theme2/bg.gif",
+                "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme2/bg.gif",
+                "profile_background_tile": false,
+                "profile_link_color": "1F98C7",
+                "profile_sidebar_border_color": "C6E2EE",
+                "profile_sidebar_fill_color": "DAECF4",
+                "profile_text_color": "663B12",
+                "profile_use_background_image": true,
+                "profile_image_url": "http://pbs.twimg.com/profile_images/3515864062/7e088e8cad32eaee7ff89daf798c699b_normal.png",
+                "profile_image_url_https": "https://pbs.twimg.com/profile_images/3515864062/7e088e8cad32eaee7ff89daf798c699b_normal.png",
+                "profile_banner_url": "https://pbs.twimg.com/profile_banners/1349669078/1403744947",
+                "default_profile": false,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweeted_status": {
+                "created_at": "Fri Aug 09 09:45:09 +0000 2019",
+                "id": 1159762532615147521,
+                "id_str": "1159762532615147521",
+                "text": "I'm enthralled\nBy what's beautiful \nBeyond skin deep\nAnd Intoxicated\nBy what's sensual \nArouses me widely \nSuch as… https://t.co/AOyPwoMGGD",
+                "display_text_range": [
+                    0,
+                    140
+                ],
+                "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+                "truncated": true,
+                "in_reply_to_status_id": null,
+                "in_reply_to_status_id_str": null,
+                "in_reply_to_user_id": null,
+                "in_reply_to_user_id_str": null,
+                "in_reply_to_screen_name": null,
+                "user": {
+                    "id": 26683817,
+                    "id_str": "26683817",
+                    "name": "Jen",
+                    "screen_name": "jenw0114",
+                    "location": null,
+                    "url": "https://www.facebook.com/MusingofJen/",
+                    "description": "Find me in my word. Not a poet, just enjoy writing here. Life is a blessing with surprise & fun. Smile, spread love & be kind! No DM & drama~21+ Thank you!",
+                    "translator_type": "none",
+                    "protected": false,
+                    "verified": false,
+                    "followers_count": 2781,
+                    "friends_count": 804,
+                    "listed_count": 113,
+                    "favourites_count": 51921,
+                    "statuses_count": 33796,
+                    "created_at": "Thu Mar 26 03:57:06 +0000 2009",
+                    "utc_offset": null,
+                    "time_zone": null,
+                    "geo_enabled": false,
+                    "lang": null,
+                    "contributors_enabled": false,
+                    "is_translator": false,
+                    "profile_background_color": "C0DEED",
+                    "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+                    "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+                    "profile_background_tile": false,
+                    "profile_link_color": "FAB81E",
+                    "profile_sidebar_border_color": "C0DEED",
+                    "profile_sidebar_fill_color": "DDEEF6",
+                    "profile_text_color": "333333",
+                    "profile_use_background_image": true,
+                    "profile_image_url": "http://pbs.twimg.com/profile_images/980784519165886464/GmWcqmqc_normal.jpg",
+                    "profile_image_url_https": "https://pbs.twimg.com/profile_images/980784519165886464/GmWcqmqc_normal.jpg",
+                    "profile_banner_url": "https://pbs.twimg.com/profile_banners/26683817/1551934905",
+                    "default_profile": false,
+                    "default_profile_image": false,
+                    "following": null,
+                    "follow_request_sent": null,
+                    "notifications": null
+                },
+                "geo": null,
+                "coordinates": null,
+                "place": null,
+                "contributors": null,
+                "is_quote_status": false,
+                "extended_tweet": {
+                    "full_text": "I'm enthralled\nBy what's beautiful \nBeyond skin deep\nAnd Intoxicated\nBy what's sensual \nArouses me widely \nSuch as\nYour enchanting heart \nUntamed with love\nWicked with desires \nI can't stop\nYearning for more\nOr wanting to keep you\nForever\n#FriTease #FridayKiss https://t.co/MWVya6VlDX",
+                    "display_text_range": [
+                        0,
+                        260
+                    ],
+                    "entities": {
+                        "hashtags": [
+                            {
+                                "text": "FriTease",
+                                "indices": [
+                                    239,
+                                    248
+                                ]
+                            },
+                            {
+                                "text": "FridayKiss",
+                                "indices": [
+                                    249,
+                                    260
+                                ]
+                            }
+                        ],
+                        "urls": [],
+                        "user_mentions": [],
+                        "symbols": [],
+                        "media": [
+                            {
+                                "id": 1159762515582001152,
+                                "id_str": "1159762515582001152",
+                                "indices": [
+                                    261,
+                                    284
+                                ],
+                                "media_url": "http://pbs.twimg.com/media/EBhN3P0UIAAd7kk.jpg",
+                                "media_url_https": "https://pbs.twimg.com/media/EBhN3P0UIAAd7kk.jpg",
+                                "url": "https://t.co/MWVya6VlDX",
+                                "display_url": "pic.twitter.com/MWVya6VlDX",
+                                "expanded_url": "https://twitter.com/jenw0114/status/1159762532615147521/photo/1",
+                                "type": "photo",
+                                "sizes": {
+                                    "thumb": {
+                                        "w": 150,
+                                        "h": 150,
+                                        "resize": "crop"
+                                    },
+                                    "large": {
+                                        "w": 968,
+                                        "h": 1368,
+                                        "resize": "fit"
+                                    },
+                                    "small": {
+                                        "w": 481,
+                                        "h": 680,
+                                        "resize": "fit"
+                                    },
+                                    "medium": {
+                                        "w": 849,
+                                        "h": 1200,
+                                        "resize": "fit"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "extended_entities": {
+                        "media": [
+                            {
+                                "id": 1159762515582001152,
+                                "id_str": "1159762515582001152",
+                                "indices": [
+                                    261,
+                                    284
+                                ],
+                                "media_url": "http://pbs.twimg.com/media/EBhN3P0UIAAd7kk.jpg",
+                                "media_url_https": "https://pbs.twimg.com/media/EBhN3P0UIAAd7kk.jpg",
+                                "url": "https://t.co/MWVya6VlDX",
+                                "display_url": "pic.twitter.com/MWVya6VlDX",
+                                "expanded_url": "https://twitter.com/jenw0114/status/1159762532615147521/photo/1",
+                                "type": "photo",
+                                "sizes": {
+                                    "thumb": {
+                                        "w": 150,
+                                        "h": 150,
+                                        "resize": "crop"
+                                    },
+                                    "large": {
+                                        "w": 968,
+                                        "h": 1368,
+                                        "resize": "fit"
+                                    },
+                                    "small": {
+                                        "w": 481,
+                                        "h": 680,
+                                        "resize": "fit"
+                                    },
+                                    "medium": {
+                                        "w": 849,
+                                        "h": 1200,
+                                        "resize": "fit"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                "quote_count": 0,
+                "reply_count": 0,
+                "retweet_count": 9,
+                "favorite_count": 18,
+                "entities": {
+                    "hashtags": [],
+                    "urls": [
+                        {
+                            "url": "https://t.co/AOyPwoMGGD",
+                            "expanded_url": "https://twitter.com/i/web/status/1159762532615147521",
+                            "display_url": "twitter.com/i/web/status/1…",
+                            "indices": [
+                                116,
+                                139
+                            ]
+                        }
+                    ],
+                    "user_mentions": [],
+                    "symbols": []
+                },
+                "favorited": false,
+                "retweeted": false,
+                "possibly_sensitive": false,
+                "filter_level": "low",
+                "lang": "en"
+            },
+            "is_quote_status": false,
+            "quote_count": 0,
+            "reply_count": 0,
+            "retweet_count": 0,
+            "favorite_count": 0,
+            "entities": {
+                "hashtags": [],
+                "urls": [],
+                "user_mentions": [
+                    {
+                        "screen_name": "jenw0114",
+                        "name": "Jen",
+                        "id": 26683817,
+                        "id_str": "26683817",
+                        "indices": [
+                            3,
+                            12
+                        ]
+                    }
+                ],
+                "symbols": []
+            },
+            "favorited": false,
+            "retweeted": false,
+            "filter_level": "low",
+            "lang": "en",
+            "matching_rules": [
+                {
+                    "tag": null
+                }
+            ]
+        }
+    ],
+    "next": "eyJhdXRoZW50aWNpdHkiOiI2YzQ3ZTJhNmE3ODVjMTBiYmNkMjUxMGI3ZTljYmY2NWU1NDY1MjE3YzMxOTdjYWVjYjM5NmYxZGEwYWUyNzdhIiwiZnJvbURhdGUiOiIyMDE5MDcxNTAwMDAiLCJ0b0RhdGUiOiIyMDE5MDgxNDA5MDEiLCJuZXh0IjoiMjAxOTA4MTQwOTAxMDYtMTE1OTgwMzgxMDczNjQ1OTc4MS0wIn0=",
+    "requestParameters": {
+        "maxResults": 100,
+        "fromDate": "201907150000",
+        "toDate": "201908140901"
+    }
+}

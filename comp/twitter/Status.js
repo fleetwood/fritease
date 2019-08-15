@@ -5,7 +5,7 @@ class Status {
     constructor(params) {
         const ext = params.extended_tweet;
         this._createDate = utils.formatTwitterDate(params.created_at);
-        this._id = utils.asNum(params.id);
+        this._id = params.id;
         
         this._text = Status.getFullText(ext, params.text);
         if (ext && ext.entities.media) {
@@ -25,6 +25,10 @@ class Status {
         if (this._user.isNamed('User')) {
             this._user.getFF5();
         }
+        if (params.is_quote_status) {
+            console.log(`This one's a quote ${params.id_str}`);
+        }
+        console.log(`Status ${params.id}`);
     }
     
     static getMedia(entities) {

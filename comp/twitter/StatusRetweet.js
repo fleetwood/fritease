@@ -9,6 +9,7 @@ class StatusRetweet extends Status {
         this._retweet_id = params.retweeted_status ? params.retweeted_status.id : null;
 
         this._facepile = null;
+        console.log(`StatusRetweet ${params.id_str} of ${this.retweetId}`);
     }
     get isRetweet() {
         return true;

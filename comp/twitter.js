@@ -3,9 +3,8 @@ const utils = require('./../comp/utils');
 const moment = utils.moment
     , path = utils.path
     , fs = utils.fs;
-const knex = require('./../comp/db/knex');
+const db = require('./db/DB');
 const mime = require('mime');
-const R = require('request');
 const Twit = require('twit');
 const User = require('./twitter/User');
 const Status = require('./twitter/Status');
@@ -19,9 +18,7 @@ const twitter = new Twit({
     consumer_secret: config.TW_API_SECRET_KEY,
     access_token: config.TW_ACCESS_TOKEN,
     access_token_secret: config.TW_ACCESS_TOKEN_SECRET,
-    app_only_auth: false,
-    // timeout_ms: 60 * 1000,  // optional HTTP request timeout to apply to all requests.
-    // strictSSL: true,     // optional - requires SSL certificates to be valid.
+    app_only_auth: false
 });
 
 /**
@@ -94,9 +91,14 @@ const friTease = (options) => new Promise((resolve, reject) => {
                     await u.getFF5();
                 }
                 catch(e) {
-                    console.log(JSON.stringify(e,null,2));
+                    console.log(`Not a user object. twitter.js Line 97`);
                     new User(u);
-                    await u.getFF5();
+                    try {
+                        await u.getFF5();
+                    }
+                    catch(ee) {
+                        console.log(`\tFailed on new User, line 100.`);
+                    }
                 }
             });
             resolve({results,...data.next});
@@ -172,7 +174,7 @@ const updateFF5_Users = (userlist, date) => {
         .then(results => {
             let users = mapUsers(results.data)
                 , FriDate = date.add(1, 'd');
-            knex.updateFF5_Users(users, FriDate)
+            db.updateFF5_Users(users, FriDate)
                 .then(result => console.log(result));
         })
         .catch(e => console.log(`ERROR updating FF5_Users() ${JSON.stringify(e)}`))
@@ -302,7 +304,7 @@ const postScheduledPrompt = (date) => new Promise((resolve, reject) => {
                 postPrompt(mediaFilePath, statusText)
                     .then(postedPrompt => {
                         if (postedPrompt.id) {
-                            knex.db('ff_posts')
+                            db.db('ff_posts')
                                 .where('id', scheduledPrompt.id)
                                 .update({
                                     complete: true,
@@ -332,7 +334,7 @@ const postScheduledPrompt = (date) => new Promise((resolve, reject) => {
  * @param {moment} date The Thursday the prompt should be posted
  */
 const getScheduledPrompt = (date) => new Promise((resolve, reject) => {
-    knex.db('ff_posts')
+    db.db('ff_posts')
         .select('*')
         .where('date', '>=', date.format('MM/DD/YYYY'))
         .where('complete', false)

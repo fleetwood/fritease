@@ -22,7 +22,7 @@ class User {
         this._follows = data.following || false;
         this._ff5 = ff5;
         this._rank = 0;
-        this.knex = require('./../db/knex');
+        this.knex = require('../db/DB');
     }
 
     get id() {

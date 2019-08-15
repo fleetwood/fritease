@@ -80,6 +80,14 @@ if (isUndefined(Object.toJsonString)) {
     });
 }
 
+if (isUndefined(Object.isNamed)) {
+    Object.defineProperty(Object.prototype, 'isNamed', {
+        value(name) {
+            return this.constructor.name === name;
+        }
+    });
+}
+
 if (isUndefined(Array.sortBy)) {
     /**
      * @param {String} property

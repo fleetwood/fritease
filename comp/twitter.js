@@ -5,13 +5,14 @@ const moment = utils.moment
     , fs = utils.fs;
 const knex = require('./../comp/db/knex');
 const mime = require('mime');
+const R = require('request');
 const Twit = require('twit');
 const User = require('./twitter/User');
 const Status = require('./twitter/Status');
 const StatusReply = require('./twitter/StatusReply');
 const StatusRetweet = require('./twitter/StatusRetweet');
 const Query = require('./twitter/Query');
-const searchTweets = './mocks/twitter.searchTweets.json';
+const searchTweets = utils.path.join(__dirname,'/mocks/twitter.searchTweets.json');
 
 const twitter = new Twit({
     consumer_key: config.TW_API_KEY,
@@ -19,8 +20,8 @@ const twitter = new Twit({
     access_token: config.TW_ACCESS_TOKEN,
     access_token_secret: config.TW_ACCESS_TOKEN_SECRET,
     app_only_auth: false,
-    timeout_ms: 60 * 1000,  // optional HTTP request timeout to apply to all requests.
-    strictSSL: true,     // optional - requires SSL certificates to be valid.
+    // timeout_ms: 60 * 1000,  // optional HTTP request timeout to apply to all requests.
+    // strictSSL: true,     // optional - requires SSL certificates to be valid.
 });
 
 /**
@@ -34,6 +35,7 @@ const twitter = new Twit({
  */
 const endpoints = {
     searchTweets: 'search/tweets',
+    thirtyday: 'tweets/search/30day/dev',
     fullArchive: 'tweets/search/fullarchive/dev',
     searchUsers: 'users/lookup',
     getUser: 'users/show',
@@ -72,11 +74,6 @@ const mapStatuses = (data) => {
         .concat(uniques)
         .sortBy('createDate', 'DESC');
 
-    // rank users
-    statuses.forEach(s => {
-        s.user.addRank(s.likes + s.retweets);
-    });
-
     return statuses;
 };
 
@@ -86,16 +83,27 @@ const mapUsers = (data, limit = -1) => {
 }
 
 const friTease = (options) => new Promise((resolve, reject) => {
-    // TODO: convert to endpoint, include next in query
-    utils.getFile(path.join(__dirname, searchTweets))
+    const query = new Query(options).FriTease();
+    // twitter.get(endpoints.thirtyday, query.toQuery())
+    utils.getFile(searchTweets)
         .then(data => {
-            data = JSON.parse(data);
-            resolve({...data, ...{results: mapStatuses(data.results)}});
+            data = JSON.parse(data); // TODO: remove parsing for live feed
+            let results = data.results;
+            results = mapStatuses(results).map(async u => {
+                try {
+                    await u.getFF5();
+                }
+                catch(e) {
+                    console.log(JSON.stringify(e,null,2));
+                    new User(u);
+                    await u.getFF5();
+                }
+            });
+            resolve({results,...data.next});
         })
-        .catch(e => reject(e));
-    // TODO: return endpoints
-    // const query = new Query(options).FriTease();
-    // return twitter.get(endpoints.searchTweets, query.toQuery());
+        .catch(e => {
+            reject(e);
+        });
 });
 
 /**
@@ -107,10 +115,10 @@ const friTease = (options) => new Promise((resolve, reject) => {
  * @see User 'comp/twitter/User.js'
  */
 const getUser = (options) => new Promise((resolve, reject) => {
-    const done = (data) => resolve(new User(data.data));
     twitter.get(endpoints.getUser, { screen_name: options.screen_name })
         .then(result => {
-            done(result);
+            let user = new User(result.data);
+            user.getFF5().then(resolve(user));
         })
         .catch(e => {
             twitter.get(endpoints.getUser, { user_id: Number(options.user_id) })
@@ -160,7 +168,7 @@ const getUsers = (options, post) => new Promise((resolve, reject) => {
 const updateFF5_Users = (userlist, date) => {
     let users = JSON.parse(userlist);
     let userNames = users.map(u => u.screen_name).join(',');
-    twitter.get(endpoints.searchUsers, {screen_name: userNames})
+    twitter.get(endpoints.searchUsers, { screen_name: userNames })
         .then(results => {
             let users = mapUsers(results.data)
                 , FriDate = date.add(1, 'd');
@@ -288,7 +296,7 @@ const postScheduledPrompt = (date) => new Promise((resolve, reject) => {
     getScheduledPrompt(date)
         .then(scheduledPrompt => {
             if (scheduledPrompt) {
-                let mediaFilePath = path.join('./../public',scheduledPrompt.image)
+                let mediaFilePath = path.join('./../public', scheduledPrompt.image)
                     , statusText = scheduledPrompt.statustext
                     , ff5_users = scheduledPrompt.ff5_users;
                 postPrompt(mediaFilePath, statusText)

@@ -22,6 +22,9 @@ class Status {
         this._retweeted = params.retweeted || false;
         
         this._user = params.user ? new User(params.user) : {};
+        if (this._user.isNamed('User')) {
+            this._user.getFF5();
+        }
     }
     
     static getMedia(entities) {

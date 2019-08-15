@@ -38,15 +38,12 @@ const init = (app, cache) => {
     app.get('/api/ui/userlist', (req, res) => {
         twitter.getUserList()
             .then(users => {
-                Promise.all(users.map(async u => await u.getFF5()))
-                    .then(() => {
-                        res.render('partials/twitter/dashboard-userlist', {
-                            title: 'Ranked Users',
-                            footer: 'Reload',
-                            list: users,
-                            layout: false
-                        });
-                    });
+                res.render('partials/twitter/dashboard-userlist', {
+                    title: 'Ranked Users',
+                    footer: 'Reload',
+                    list: users,
+                    layout: false
+                });
             })
             .catch(e => renderUiError(res, e));
     });
@@ -91,11 +88,9 @@ const init = (app, cache) => {
         };
         twitter.getUser(req.query)
             .then(user => {
-                user.getFF5().then(() => {
-                    res.render(layout.success, {
-                        user,
-                        layout: false
-                    });
+                res.render(layout.success, {
+                    user,
+                    layout: false
                 });
             })
             .catch(e => {
@@ -107,16 +102,13 @@ const init = (app, cache) => {
     app.get('/api/ui/friTease', cache.route('/api/ui/friTease'), (req, res) => {
         friTease(req, cache)
             .then((stream) => {
-                Promise.all(stream.results.map(async s => await s.user.getFF5()))
-                    .then(() => {
-                        res.render('partials/stream', {
-                            stream: stream.results,
-                            next: stream.next,
-                            showNext: stream.next ? true : false,
-                            count: stream.results.length,
-                            layout: false
-                        })
-                    });
+                res.render('partials/stream', {
+                    stream: stream.results,
+                    next: stream.next,
+                    showNext: stream.next ? true : false,
+                    count: stream.results.length,
+                    layout: false
+                });
             })
             .catch(e => renderUiError(res, e));
     });

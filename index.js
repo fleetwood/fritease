@@ -18,6 +18,7 @@ const twitter = require('./comp/twitter');
 const moment = utils.moment;
 const Scheduler = require('./comp/Scheduler');
 
+
 app.use(function (req, res, next) {
     req.rawBody = '';
     req.on('data', (chunk) => req.rawBody += chunk);
@@ -59,6 +60,10 @@ hbs.registerHelper('gt', function (a, b, options) {
   if (a >= b) { return options.fn(this); }
   return options.inverse(this);
 });
+
+// TODO: build an async call to get existing FF5 users as part of schedule
+// so that User method doesn't have to make a db call every time. Will need
+// to reference ff5_users as part of app
 
 api.init(app);
 apiUI.init(app, cache);

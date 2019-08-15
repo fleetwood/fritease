@@ -102,11 +102,8 @@ class User {
         let rank = this._rank;
         if (this.followers > 0) rank += Math.floor(this.followers / 1000);
         if (this.tweets > 0) rank += Math.floor(this.tweets / 1000);
+        rank += this.likes + ((this.ft_retweets + this.ft_tweets) *2);
         return rank;
-    }
-
-    addRank(val) {
-        this._rank += val;
     }
 
     addFF5(date) {

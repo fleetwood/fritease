@@ -70,7 +70,7 @@ const mapStatuses = (data) => {
     statuses = statuses
         .filter(f => !f.isRetweet)
         .concat(uniques)
-        .sortBy('createDate', 'DESC');
+        .sort((a,b) => moment(a.createDate) > moment(b.createDate) ? -1 : 1);
 
     // rank users
     statuses.forEach(s => {

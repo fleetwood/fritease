@@ -1,21 +1,25 @@
-exports.up = function (knex, Promise) {
+const prompts = 'fritease_prompts'
+    , users = 'fritease_users'
+    , themes = 'fritease_themes';
+
+exports.up = (knex, Promise) => {
     return Promise.all([
 
-        knex.schema.createTable('fritease_themes', function(table){
+        knex.schema.createTable(themes, (table) => {
             table.increments('id').primary();
+            table.date('date').unique();
             table.string('url');
-            table.date('date');
             table.string('theme1');
             table.string('theme2');
         }),
 
-        knex.schema.createTable('fritease_prompts', function(table){
+        knex.schema.createTable(prompts, (table) => {
             table.increments('id').primary();
             table.bigint('status_id').unique().nullable();
             table.date('date').unique();
         }),
 
-        knex.schema.createTable('fritease_users', function(table){
+        knex.schema.createTable(users, (table) => {
             table.bigint('user_id');
             table.bigint('prompt_id');
             table.date('date');
@@ -25,8 +29,8 @@ exports.up = function (knex, Promise) {
 
 exports.down = function (knex, Promise) {
     return Promise.all([
-        knex.schema.dropTable('ff_users'),
-        knex.schema.dropTable('ff_images'),
-        knex.schema.dropTable('ff_posts')
+        knex.schema.dropTable(themes),
+        knex.schema.dropTable(prompts),
+        knex.schema.dropTable(users)
     ]);
 };

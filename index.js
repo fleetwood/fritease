@@ -1,4 +1,4 @@
-const config = require('./comp/config');
+const config = require('./classes/config');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
@@ -8,15 +8,15 @@ const http = require('http');
 const path = require('path');
 const api = require('./api');
 const apiUI = require('./api.ui');
-const utils = require('./comp/utils');
+const utils = require('./classes/utils');
 const app = express();
 const cache = require('express-redis-cache')({
   prefix: 'fritease',
   expire: 1000*60*60*24
 });
-const twitter = require('./comp/twitter');
+const twitter = require('./classes/twitter');
 const moment = utils.moment;
-const Scheduler = require('./comp/Scheduler');
+const Scheduler = require('./classes/Scheduler');
 
 
 app.use(function (req, res, next) {
@@ -83,9 +83,9 @@ app.get('/', cache.route('index'), (req, res) => {
         });
   })
   .get('/icons',(req,res) => {
-    utils.getFile(path.join(__dirname,'/comp/mocks/icons.json'))
+    utils.getFile(path.join(__dirname,'/classes/mocks/icons.json'))
         .then(icons => {
-          utils.getFile(path.join(__dirname,'/comp/mocks/twitter_light.css.json'))
+          utils.getFile(path.join(__dirname,'/classes/mocks/twitter_light.css.json'))
             .then(css => {
               icons = icons.toJson();
               let style =

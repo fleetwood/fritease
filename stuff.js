@@ -1,9 +1,9 @@
-const utils = require('./comp/utils');
-const colors = require('./comp/mocks/twitter_light.css.json');
+const utils = require('./classes/utils');
+const colors = require('./classes/mocks/twitter_light.css.json');
 const core = './public/styles/twitter_core.bundle.css';
 const fritease = './public/styles/twitter_core.fritease.css';
-const knex = require('./comp/db/knex');
-const twitter = require('./comp/twitter').twitter;
+const knex = require('./classes/db/knex');
+const twitter = require('./classes/twitter').twitter;
 
 const updateCSS = () => new Promise((resolve, reject) => {
     console.log(`Updating css...`);

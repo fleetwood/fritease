@@ -1,8 +1,8 @@
-const twitter = require('./comp/twitter')
-    , utils = require('./comp/utils')
-    , knex = require('./comp/db/knex')
-    , renderError = require('./comp/utils.rendering').renderError
-    , renderUiError = require('./comp/utils.rendering').renderUiError;
+const twitter = require('./classes/twitter')
+    , utils = require('./classes/utils')
+    , knex = require('./classes/db/knex')
+    , renderError = require('./classes/utils.rendering').renderError
+    , renderUiError = require('./classes/utils.rendering').renderUiError;
 
 const friTease = (req) => twitter.friTease({ friTease: true, ...req.query });
 

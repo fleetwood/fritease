@@ -1,15 +1,15 @@
 
 ////////////////////////////////////
 // REQUIRES
-const utils = require('./comp/utils')
+const utils = require('./classes/utils')
     , path = utils.path
     , fs = utils.fs
     , moment = utils.moment
-    , knex = require('./comp/db/knex')
-    , twitter = require('./comp/twitter')
-    , User = require('./comp/twitter/User')
-    , renderError = require('./comp/utils.rendering').renderError
-    , renderUiError = require('./comp/utils.rendering').renderUiError;
+    , knex = require('./classes/db/knex')
+    , twitter = require('./classes/twitter')
+    , User = require('./classes/twitter/User')
+    , renderError = require('./classes/utils.rendering').renderError
+    , renderUiError = require('./classes/utils.rendering').renderUiError;
 
 const friTease = (req, cache) => twitter.friTease({ friTease: true, ...req.query, cache});
 

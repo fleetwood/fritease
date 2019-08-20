@@ -1,0 +1,602 @@
+[
+    {
+        "url": "/images/banners/2018/01-26.png",
+        "date": "1/26/2018",
+        "theme1": "SKIN",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/02-02.png",
+        "date": "2/2/2018",
+        "theme1": "EMBRACE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/02-09.png",
+        "date": "2/9/2018",
+        "theme1": "SWEAT",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/02-16.png",
+        "date": "2/16/2018",
+        "theme1": "HANDS",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/02-23.png",
+        "date": "2/23/2018",
+        "theme1": "NEED",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/03-02.png",
+        "date": "3/2/2018",
+        "theme1": "GENTLE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/03-09.png",
+        "date": "3/9/2018",
+        "theme1": "URGE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/03-16.png",
+        "date": "3/16/2018",
+        "theme1": "HEAT",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/03-23.png",
+        "date": "3/23/2018",
+        "theme1": "STEEL",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/03-30.png",
+        "date": "3/30/2018",
+        "theme1": "CONTROL",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/04-06.png",
+        "date": "4/6/2018",
+        "theme1": "DARK",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/04-13.png",
+        "date": "4/13/2018",
+        "theme1": "FOOL",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/04-20.png",
+        "date": "4/20/2018",
+        "theme1": "TOUCH",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/04-27.png",
+        "date": "4/27/2018",
+        "theme1": "CURVE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/05-04.png",
+        "date": "5/4/2018",
+        "theme1": "AROUSE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/05-11.png",
+        "date": "5/11/2018",
+        "theme1": "LASH",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/05-18.png",
+        "date": "5/18/2018",
+        "theme1": "GLARE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/05-25.png",
+        "date": "5/25/2018",
+        "theme1": "CLOSE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/06-01.png",
+        "date": "6/1/2018",
+        "theme1": "HOPE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/06-08.png",
+        "date": "6/8/2018",
+        "theme1": "SINEW",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/06-15.png",
+        "date": "6/15/2018",
+        "theme1": "LIQUID",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/06-22.png",
+        "date": "6/22/2018",
+        "theme1": "MOON",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/06-29.png",
+        "date": "6/29/2018",
+        "theme1": "GIVE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/07-06.png",
+        "date": "7/6/2018",
+        "theme1": "PRESS",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/07-13.png",
+        "date": "7/13/2018",
+        "theme1": "FALL",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/07-20.png",
+        "date": "7/20/2018",
+        "theme1": "LIGHT",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/07-27.png",
+        "date": "7/27/2018",
+        "theme1": "DREAM",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/08-03.png",
+        "date": "8/3/2018",
+        "theme1": "BREAK",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/08-10.png",
+        "date": "8/10/2018",
+        "theme1": "FLAME",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/08-17.png",
+        "date": "8/17/2018",
+        "theme1": "QUIET",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/08-24.png",
+        "date": "8/24/2018",
+        "theme1": "DRIP",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/08-31.png",
+        "date": "8/31/2018",
+        "theme1": "DRIVE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/09-07.png",
+        "date": "9/7/2018",
+        "theme1": "BONE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/09-14.png",
+        "date": "9/14/2018",
+        "theme1": "SHOE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/09-21.png",
+        "date": "9/21/2018",
+        "theme1": "DRIFT",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/09-28.png",
+        "date": "9/28/2018",
+        "theme1": "SIN",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/10-05.png",
+        "date": "10/5/2018",
+        "theme1": "SWEET",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/10-12.png",
+        "date": "10/12/2018",
+        "theme1": "CLUTCH",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/10-19.png",
+        "date": "10/19/2018",
+        "theme1": "FINGERS",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/10-26.png",
+        "date": "10/26/2018",
+        "theme1": "CRY",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/11-02.png",
+        "date": "11/2/2018",
+        "theme1": "WINE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/11-09.png",
+        "date": "11/9/2018",
+        "theme1": "LUSH",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/11-16.png",
+        "date": "11/16/2018",
+        "theme1": "DRESS",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/11-23.png",
+        "date": "11/23/2018",
+        "theme1": "ARM",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/11-30.png",
+        "date": "11/30/2018",
+        "theme1": "VOICE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/12-07.png",
+        "date": "12/7/2018",
+        "theme1": "BREATH",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/12-14.png",
+        "date": "12/14/2018",
+        "theme1": "PAIN",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/12-21.png",
+        "date": "12/21/2018",
+        "theme1": "FACE",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2018/12-28.png",
+        "date": "12/28/2018",
+        "theme1": "END",
+        "theme2": ""
+    },
+    {
+        "url": "/images/banners/2019/01-04.png",
+        "date": "1/4/2019",
+        "theme1": "STORM",
+        "theme2": "QUEEN"
+    },
+    {
+        "url": "/images/banners/2019/01-11.png",
+        "date": "1/11/2019",
+        "theme1": "SHIFT",
+        "theme2": "SLIDE"
+    },
+    {
+        "url": "/images/banners/2019/01-18.png",
+        "date": "1/18/2019",
+        "theme1": "BOND",
+        "theme2": "BLEED"
+    },
+    {
+        "url": "/images/banners/2019/01-25.png",
+        "date": "1/25/2019",
+        "theme1": "MAGIC",
+        "theme2": "MASTER"
+    },
+    {
+        "url": "/images/banners/2019/02-01.png",
+        "date": "2/1/2019",
+        "theme1": "WINE",
+        "theme2": "WEEP"
+    },
+    {
+        "url": "/images/banners/2019/02-08.png",
+        "date": "2/8/2019",
+        "theme1": "LEER",
+        "theme2": "LOST"
+    },
+    {
+        "url": "/images/banners/2019/02-15.png",
+        "date": "2/15/2019",
+        "theme1": "DRASTIC",
+        "theme2": "DESIRE"
+    },
+    {
+        "url": "/images/banners/2019/02-22.png",
+        "date": "2/22/2019",
+        "theme1": "HEAVY",
+        "theme2": "HONOR"
+    },
+    {
+        "url": "/images/banners/2019/03-01.png",
+        "date": "3/1/2019",
+        "theme1": "FURY",
+        "theme2": "FRENZY"
+    },
+    {
+        "url": "/images/banners/2019/03-08.png",
+        "date": "3/8/2019",
+        "theme1": "ALOOF",
+        "theme2": "ALARM"
+    },
+    {
+        "url": "/images/banners/2019/03-22.png",
+        "date": "3/22/2019",
+        "theme1": "RAGGED",
+        "theme2": "SMOOTH"
+    },
+    {
+        "url": "/images/banners/2019/03-29.png",
+        "date": "3/29/2019",
+        "theme1": "DESPERATE",
+        "theme2": "SEPARATE"
+    },
+    {
+        "url": "/images/banners/2019/04-05.png",
+        "date": "4/5/2019",
+        "theme1": "GLOWER",
+        "theme2": "GLAMOUR"
+    },
+    {
+        "url": "/images/banners/2019/04-12.png",
+        "date": "4/12/2019",
+        "theme1": "STRIPE",
+        "theme2": "STEAL"
+    },
+    {
+        "url": "/images/banners/2019/04-19.png",
+        "date": "4/19/2019",
+        "theme1": "INSIDE",
+        "theme2": "INVOKE"
+    },
+    {
+        "url": "/images/banners/2019/04-26.png",
+        "date": "4/26/2019",
+        "theme1": "BETRAY",
+        "theme2": "BREATHE"
+    },
+    {
+        "url": "/images/banners/2019/05-03.png",
+        "date": "5/3/2019",
+        "theme1": "FRUSTRATE",
+        "theme2": "FLUSTER"
+    },
+    {
+        "url": "/images/banners/2019/05-10.png",
+        "date": "5/10/2019",
+        "theme1": "REVILE",
+        "theme2": "REVEAL"
+    },
+    {
+        "url": "/images/banners/2019/05-17.png",
+        "date": "5/17/2019",
+        "theme1": "EVENING",
+        "theme2": "MORNING"
+    },
+    {
+        "url": "/images/banners/2019/05-24.png",
+        "date": "5/24/2019",
+        "theme1": "HIDE",
+        "theme2": "HELP"
+    },
+    {
+        "url": "/images/banners/2019/05-31.png",
+        "date": "5/31/2019",
+        "theme1": "SWIFT",
+        "theme2": "SWEET"
+    },
+    {
+        "url": "/images/banners/2019/06-07.png",
+        "date": "6/7/2019",
+        "theme1": "SCREAM",
+        "theme2": "WHISPER"
+    },
+    {
+        "url": "/images/banners/2019/06-14.png",
+        "date": "6/14/2019",
+        "theme1": "BURN",
+        "theme2": "BLOW"
+    },
+    {
+        "url": "/images/banners/2019/06-21.png",
+        "date": "6/21/2019",
+        "theme1": "COPPER",
+        "theme2": "GOLD"
+    },
+    {
+        "url": "/images/banners/2019/06-28.png",
+        "date": "6/28/2019",
+        "theme1": "SISTER",
+        "theme2": "DAUGHTER"
+    },
+    {
+        "url": "/images/banners/2019/07-05.png",
+        "date": "7/5/2019",
+        "theme1": "LAVISH",
+        "theme2": "LUSCIOUS"
+    },
+    {
+        "url": "/images/banners/2019/07-12.png",
+        "date": "7/12/2019",
+        "theme1": "BENEATH",
+        "theme2": "BETWEEN"
+    },
+    {
+        "url": "/images/banners/2019/07-19.png",
+        "date": "7/19/2019",
+        "theme1": "BOLD",
+        "theme2": "HUMBLE"
+    },
+    {
+        "url": "/images/banners/2019/07-26.png",
+        "date": "7/26/2019",
+        "theme1": "CLING",
+        "theme2": "CARESS"
+    },
+    {
+        "url": "/images/banners/2019/08-02.png",
+        "date": "8/2/2019",
+        "theme1": "DISROBE",
+        "theme2": "COVER"
+    },
+    {
+        "url": "/images/banners/2019/08-09.png",
+        "date": "8/9/2019",
+        "theme1": "IGNORE",
+        "theme2": "YEARN"
+    },
+    {
+        "url": "/images/banners/2019/08-16.png",
+        "date": "8/16/2019",
+        "theme1": "COLLAPSE",
+        "theme2": "CONTROL"
+    },
+    {
+        "url": "/images/banners/2019/08-23.png",
+        "date": "8/23/2019",
+        "theme1": "THRUST",
+        "theme2": "THIRST"
+    },
+    {
+        "url": "/images/banners/2019/08-30.png",
+        "date": "8/30/2019",
+        "theme1": "RAIN",
+        "theme2": "CLOUD"
+    },
+    {
+        "url": "/images/banners/2019/09-13.png",
+        "date": "9/13/2019",
+        "theme1": "THREAT",
+        "theme2": "THREAD"
+    },
+    {
+        "url": "/images/banners/2019/09-16.png",
+        "date": "9/16/2019",
+        "theme1": "FAKE",
+        "theme2": "FLOW"
+    },
+    {
+        "url": "/images/banners/2019/09-20.png",
+        "date": "9/20/2019",
+        "theme1": "CONCRETE",
+        "theme2": "LIQUID"
+    },
+    {
+        "url": "/images/banners/2019/09-27.png",
+        "date": "9/27/2019",
+        "theme1": "DRUM",
+        "theme2": "DREAM"
+    },
+    {
+        "url": "/images/banners/2019/10-04.png",
+        "date": "10/4/2019",
+        "theme1": "CONSTRUCT",
+        "theme2": "CONCEDE"
+    },
+    {
+        "url": "/images/banners/2019/10-11.png",
+        "date": "10/11/2019",
+        "theme1": "DESTROY",
+        "theme2": "EMPOWER"
+    },
+    {
+        "url": "/images/banners/2019/10-18.png",
+        "date": "10/18/2019",
+        "theme1": "KNIFE",
+        "theme2": "KNOT"
+    },
+    {
+        "url": "/images/banners/2019/10-25.png",
+        "date": "10/25/2019",
+        "theme1": "HORROR",
+        "theme2": "PRINCE(SS)"
+    },
+    {
+        "url": "/images/banners/2019/11-01.png",
+        "date": "11/1/2019",
+        "theme1": "WICKED",
+        "theme2": "WANDER"
+    },
+    {
+        "url": "/images/banners/2019/11-08.png",
+        "date": "11/8/2019",
+        "theme1": "CLEVER",
+        "theme2": "CLASSIC"
+    },
+    {
+        "url": "/images/banners/2019/11-15.png",
+        "date": "11/15/2019",
+        "theme1": "SEAR",
+        "theme2": "SOAR"
+    },
+    {
+        "url": "/images/banners/2019/11-22.png",
+        "date": "11/22/2019",
+        "theme1": "WRINKLE",
+        "theme2": "GLEAN"
+    },
+    {
+        "url": "/images/banners/2019/11-29.png",
+        "date": "11/29/2019",
+        "theme1": "PLEAD",
+        "theme2": "PLIANT"
+    },
+    {
+        "url": "/images/banners/2019/12-06.png",
+        "date": "12/6/2019",
+        "theme1": "SACRAMENT",
+        "theme2": "INSTRUMENT"
+    },
+    {
+        "url": "/images/banners/2019/12-13.png",
+        "date": "12/13/2019",
+        "theme1": "CURSE",
+        "theme2": "LUCK"
+    },
+    {
+        "url": "/images/banners/2019/12-20.png",
+        "date": "12/20/2019",
+        "theme1": "SCRATCH",
+        "theme2": "SLIVER"
+    },
+    {
+        "url": "/images/banners/2019/12-27.png",
+        "date": "12/27/2019",
+        "theme1": "CONCLUSION",
+        "theme2": "COMPULSION"
+    }
+]

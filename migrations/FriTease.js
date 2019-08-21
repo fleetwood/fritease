@@ -1,36 +1,35 @@
-const prompts = 'fritease_prompts'
-    , users = 'fritease_users'
-    , themes = 'fritease_themes';
+const db = require('./../classes/db/DB')
+    , models = db.Models
+    , tables= db.ModelTables;
 
 exports.up = (knex, Promise) => {
     return Promise.all([
 
-        knex.schema.createTable(themes, (table) => {
-            table.increments('id').primary();
+        knex.schema.createTable(tables.Theme, (table) => {
+            table.increments();
             table.date('date').unique();
             table.string('url');
             table.string('theme1');
             table.string('theme2');
+            table.datetime('created_at');
+            table.datetime('updated_at');
         }),
 
-        knex.schema.createTable(prompts, (table) => {
-            table.increments('id').primary();
-            table.bigint('status_id').unique().nullable();
+        knex.schema.createTable(tables.Prompt, (table) => {
+            table.increments();
+            table.bigint('status_id').nullable();
+            table.integer('theme_id').nullable();
             table.date('date').unique();
+            table.datetime('created_at');
+            table.datetime('updated_at');
         }),
 
-        knex.schema.createTable(users, (table) => {
-            table.bigint('user_id');
-            table.bigint('prompt_id');
-            table.date('date');
-        })
     ])
 };
 
 exports.down = function (knex, Promise) {
     return Promise.all([
-        knex.schema.dropTable(themes),
-        knex.schema.dropTable(prompts),
-        knex.schema.dropTable(users)
+        knex.schema.dropTable(tables.Theme),
+        knex.schema.dropTable(tables.Prompt),
     ]);
 };

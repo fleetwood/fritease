@@ -1,12 +1,13 @@
-const tableName = 'users';
+const db = require('./../classes/db/DB')
+    , models = db.Models
+    , tables= db.ModelTables;
 
 exports.up = (knex, Promise) => {
     return Promise.all([
-        knex.schema.createTable(tableName, (table) => {
+        knex.schema.createTable(tables.User, (table) => {
             table.bigint('id').primary();
             table.string('name').notNullable();
             table.string('screen_name').notNullable();
-            table.datetime('created_at');
             table.string('url');
             table.text('description');
             table.integer('followers_count');
@@ -20,12 +21,14 @@ exports.up = (knex, Promise) => {
             table.string('profile_image_url_https');
             table.string('profile_banner_url');
             table.boolean('following').defaultTo(false);
+            table.datetime('created_at');
+            table.datetime('updated_at');
         })
     ]);
 };
 
 exports.down = (knex, Promise) => {
     return Promise.all([
-        knex.schema.dropTable(tableName)
+        knex.schema.dropTable(tables.User)
     ]);
 };

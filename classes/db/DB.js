@@ -1,67 +1,35 @@
 const config = require('../config');
 const knex = require('knex')(config.knex);
+
+/**
+ * Enum for Models
+ */
 const Models = {
-    MEDIA: 'MEDIA',
-    PROMPT: 'PROMPT',
-    STATUS: 'STATUS',
-    THEME: 'THEME',
-    USER: 'USER'
+    Media: 'Media',
+    Prompt: 'Prompt',
+    Status: 'Status' ,
+    Theme: 'Theme',
+    User: 'User' 
 };
 
-const fetch = async(from, where) => new Promise((resolve, reject) => {
-    knex(from)
-        .select('*')
-        .where(where)
-        .then(result => {
-            resolve(result[0]);
-        })
-        .catch(e => reject(e));
-});
-
-const fetchAll = async(from, where) => new Promise((resolve, reject) => {
-    knex(from)
-        .select('*')
-        .where(where)
-        .then(result => {
-            resolve(result);
-        })
-        .catch(e => reject(e));
-});
-// const Media = require('./models/Media'),
-//     Prompt = require('./models/Prompt'),
-//     Status = require('./models/Status'),
-//     Theme = require('./models/Theme'),
-//     User = require('./models/User');
-
-// const saveScheduledPrompt = (params) => new Promise((resolve, reject) => {
-//     const insert = knex('ff_posts')
-//         .insert(params)
-//         .toString();
-//     const update = knex('ff_posts')
-//         .update(params)
-//         .whereRaw(`ff_posts.date = ?`, [params.date])
-//         .toString();
-//     const query = `${insert} 
-//         ON CONFLICT (date) 
-//         DO UPDATE 
-//         SET ${update.replace(/^update\s.*\sset\s/i, '')}`;
-
-//     knex.raw(query)
-//         .then(res => resolve(res))
-//         .catch(e => reject(e));
-// });
-
-// knex.on('query', function( queryData ) {
-//     let sql = queryData.sql;
-//     queryData.bindings.forEach(b => sql.replace('?',b));
-//     if (config.knex.debug === true) {
-//         console.log(sql);
-//     }
-// });
+/**
+ * Names of the model tables in the database
+ * @property {String} Media _media_
+ * @property {String} Prompt _prompts_
+ * @property {String} Status _statuses_
+ * @property {String} Theme _themes_
+ * @property {String} User _users_
+ */
+const ModelTables = {
+    Media: 'media',
+    Prompt: 'prompts',
+    Status: 'statuses',
+    Theme: 'themes',
+    User: 'users'
+}
 
 module.exports = {
     knex,
-    fetch,
-    fetchAll,
-    Models
+    Models,
+    ModelTables
 }

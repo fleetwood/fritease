@@ -147,6 +147,11 @@ class User extends KnexModel {
             following: this.following,
         }
     }
+
+    save() {
+        console.log(`Saving (User)`);
+        return super.save();
+    }
 }
 
 module.exports = User;

@@ -3,7 +3,7 @@ const Status = require('./Status');
 class StatusRetweet extends Status {
     constructor(params, mapType) {
         super(params, mapType);
-        this.retweet_status = new Status(params.retweeted_status);
+        this.retweet_status = new Status(params.retweeted_status) || null;
     }
     get retweet_status_id() {
       return this._retweet_status_id || null;
@@ -24,11 +24,12 @@ class StatusRetweet extends Status {
       return map;
     }
 
-    save() { return new Promise((resolve, reject) => {
-          this.retweet_status.save()
-            .then(resolve(super.save()))
-            .catch(e => reject(e));
-      });
+    save() {
+      console.log(`Saving (Retweet)`);
+      if (this.retweet_status) {
+        this._dependents.push(this.retweet_status);
+      }
+      return super.save();
     }
 }
 

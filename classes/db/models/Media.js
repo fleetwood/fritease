@@ -113,6 +113,11 @@ class Media extends KnexModel {
   set sizes(val) {
     this._sizes = val;
   }
+  
+  save() {
+    console.log(`Saving (Media)`);
+    return super.save();
+  }
 }
 
 module.exports = Media;

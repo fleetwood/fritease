@@ -17,10 +17,7 @@ class Status extends KnexModel {
         }
 
         this.user = new User(params.user);
-        this.addDependent({item: this.user, type: KnexModel.modelTypes.USER});
-        
         this.media = new Media(params.extended_tweet) || null;
-        this.addDependent({item: this.media, type: KnexModel.modelTypes.MEDIA});
     }
     
     get id() {
@@ -133,6 +130,19 @@ class Status extends KnexModel {
       }
     }
 
+    save() {
+       console.log(`Saving (Status)`);
+       if (this.user) {
+          console.log(`\tDependent User`);
+          this._dependents.push(this.user);
+       }
+       if (this.media) {
+         console.log(`\tDependent Media`);
+         // URHERE: Undefined binding(s) detected when compiling SELECT query: select * from "media" where "id" = ?
+         // this._dependents.push(this.media);
+       }
+       return super.save();
+    }
 }
 
 module.exports = Status;

@@ -42,14 +42,14 @@ const init = (app) => {
 
     app.get('/api/postPrompt', (req, res) => {
         let mediaFilePath = `./../public${req.query.imageUrl}`
-            , statusText = req.query.statusText;
+            , statusText = req.query.statusText
+            , ff5_users = req.query.ff5_users;
         twitter.postPrompt(mediaFilePath, statusText, ff5_users)
             .then(result => {
                 res.send({
                     status: 200,
                     data: `http://twitter.com/johnfpendleton/status/${result.id}`
                 });
-                knex.updateFF5_Users(ff5_users, utils.moment());
             })
             .catch(e => {
                 res.send({

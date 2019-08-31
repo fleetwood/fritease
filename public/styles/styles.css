@@ -25,7 +25,9 @@
 #alert-container {
     position: absolute;
     z-index: 1000;
-    width: 588px;
+    top: 50px;
+    margin: 0;
+    display: flex;;
 }
 .alert {
   padding: 8px 35px 8px 14px;

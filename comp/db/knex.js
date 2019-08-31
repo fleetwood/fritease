@@ -81,9 +81,11 @@ const updateFF5_Users = (userList, date) => new Promise((resolve, reject) => {
                 await u.save()
                     .then(result => console.log(`SAVED ${u.screenName}`))
                     .catch(e => console.error(`ERROR saving ${u.screenName}:\n${JSON.stringify(e)}`));
-            });
+            })
+            .then(resolve(true))
+            .catch(e => reject(e));
         })
-   reject()
+        .catch(e => reject(e));
 });
 
 knex.on('query', function( queryData ) {

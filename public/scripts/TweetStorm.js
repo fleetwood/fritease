@@ -144,7 +144,8 @@ L/RT your favorites!
                 contentType: 'application/json',
                 data: {
                     statusText: params.statusText(),
-                    imageUrl: params.imageUrl()
+                    imageUrl: params.imageUrl(),
+                    ff5_users: FF5.asString
                 },
                 error: (err) => FF5.dispatch(FF5.Events.notice, err.statusText),
                 success: (result) => {

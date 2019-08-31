@@ -1,6 +1,7 @@
 $(document).ready(function () {
     const streamContent = $('#stream-content');
     const streamLoading = $('#stream-loading');
+    let page = 0;
     
     const urlParams = {};
     new URLSearchParams(window.location.search).forEach((v,k) => urlParams[k]=v);
@@ -9,6 +10,7 @@ $(document).ready(function () {
         loadVisibility(false);
         if (next) {
             streamContent.append(content);
+            $('html, body').animate({scrollTop: $(`#page_${page}`).offset().top}, 800);
             return;
         }
         streamContent.html(content);
@@ -57,6 +59,7 @@ $(document).ready(function () {
     $('body').on('click', '#more-tweets', (e) => {
         console.log($(e.currentTarget).attr('data-next'));
         getStream($(e.currentTarget).attr('data-next'));
+        streamContent.append(`<span id="page_${++page}"><hr /></span>`);
         $(e.currentTarget).remove();
     });
 

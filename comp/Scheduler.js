@@ -97,10 +97,10 @@ class Scheduler {
     }
 
     init() {
-        // check every 15 minutes
+        // check every 10 minutes
         this.watcher = setInterval(() => {
             this.watchSchedules();
-        }, 1000*60*15);
+        }, 1000*60*10);
     }
 
     watchSchedules() {

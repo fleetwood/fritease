@@ -35,6 +35,7 @@ const twitter = new Twit({
 const endpoints = {
     searchTweets: 'search/tweets',
     fullArchive: 'tweets/search/fullarchive/dev',
+    thirtyArchive: 'tweets/search/30day/dev',
     searchUsers: 'users/lookup',
     getUser: 'users/show',
     mediaUpload: 'media/upload',
@@ -70,7 +71,7 @@ const mapStatuses = (data) => {
     statuses = statuses
         .filter(f => !f.isRetweet)
         .concat(uniques)
-        .sortBy('createDate', 'DESC');
+        .sort((a,b) => moment(a.createDate) > moment(b.createDate) ? -1 : 1);
 
     // rank users
     statuses.forEach(s => {
@@ -87,15 +88,25 @@ const mapUsers = (data, limit = -1) => {
 
 const friTease = (options) => new Promise((resolve, reject) => {
     // TODO: convert to endpoint, include next in query
-    utils.getFile(path.join(__dirname, searchTweets))
+    // utils.getFile(path.join(__dirname, searchTweets))
+    //     .then(data => {
+    //         data = JSON.parse(data);
+    //         resolve({...data, ...{results: mapStatuses(data.results)}});
+    //     })
+    //     .catch(e => reject(e));
+    // TODO: return endpoints
+    const query = new Query(options).FriTease();
+    twitter
+        .get(endpoints.thirtyArchive, query.toQuery())
         .then(data => {
-            data = JSON.parse(data);
+            // for tweetSearch mock
+            // data = JSON.parse(data);
+
+            // for twitter api results
+            data = data.data;
             resolve({...data, ...{results: mapStatuses(data.results)}});
         })
-        .catch(e => reject(e));
-    // TODO: return endpoints
-    // const query = new Query(options).FriTease();
-    // return twitter.get(endpoints.searchTweets, query.toQuery());
+        .catch(e => reject(e));;
 });
 
 /**
@@ -186,7 +197,7 @@ const makePost = (endpoint, params) => new Promise((resolve, reject) => {
     });
 });
 
-const postPrompt = (mediaFilePath, statusText) => new Promise((resolve, reject) => {
+const postPrompt = (mediaFilePath, statusText, ff5_users) => new Promise((resolve, reject) => {
     uploadMediaChunks(utils.absolutePath(mediaFilePath))
         .then(mediaId => {
             console.log(`\tmediaId ${mediaId}`);
@@ -197,6 +208,7 @@ const postPrompt = (mediaFilePath, statusText) => new Promise((resolve, reject) 
             makePost(endpoints.postTweet, status)
                 .then(result => {
                     console.log(`SUCCESS!`);
+                    updateFF5_Users(ff5_users, utils.moment())
                     resolve(result);
                 })
         })

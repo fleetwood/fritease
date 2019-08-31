@@ -1,0 +1,339 @@
+{
+    "data": {
+      "statuses": [
+        {
+          "created_at": "Sat Apr 07 05:51:00 +0000 2018",
+          "id": 982495939985371100,
+          "id_str": "982495939985371136",
+          "text": "RT @Dimple969: She wasn't the fairest....\nbut her love felt tangible\n\n~poetess\n\n#hangtenstories #PoemTrail #beautifulmess #DimpleVerse #bec…",
+          "truncated": false,
+          "entities": {
+            "hashtags": [
+              {
+                "text": "hangtenstories",
+                "indices": [
+                  80,
+                  95
+                ]
+              },
+              {
+                "text": "PoemTrail",
+                "indices": [
+                  96,
+                  106
+                ]
+              },
+              {
+                "text": "beautifulmess",
+                "indices": [
+                  107,
+                  121
+                ]
+              },
+              {
+                "text": "DimpleVerse",
+                "indices": [
+                  122,
+                  134
+                ]
+              }
+            ],
+            "symbols": [],
+            "user_mentions": [
+              {
+                "screen_name": "Dimple969",
+                "name": "Dimple ©™",
+                "id": 2299784766,
+                "id_str": "2299784766",
+                "indices": [
+                  3,
+                  13
+                ]
+              }
+            ],
+            "urls": []
+          },
+          "metadata": {
+            "iso_language_code": "en",
+            "result_type": "recent"
+          },
+          "source": "Twitter for Android",
+          "in_reply_to_status_id": null,
+          "in_reply_to_status_id_str": null,
+          "in_reply_to_user_id": null,
+          "in_reply_to_user_id_str": null,
+          "in_reply_to_screen_name": null,
+          "user": {
+            "id": 729274353930637300,
+            "id_str": "729274353930637312",
+            "name": "DimpleVerse",
+            "screen_name": "Dimpleverse",
+            "location": "UK",
+            "description": "love conquers all\n#poetry #prompt #23words #tenwords #haiku #sixwords \nhost @dimple969\nhttps://t.co/5udDPONozf",
+            "url": null,
+            "entities": {
+              "description": {
+                "urls": [
+                  {
+                    "url": "https://t.co/5udDPONozf",
+                    "expanded_url": "https://twitter.com/search?q=from%3ADimpleverse&rsc=typd",
+                    "display_url": "twitter.com/search?q=from%…",
+                    "indices": [
+                      87,
+                      110
+                    ]
+                  }
+                ]
+              }
+            },
+            "protected": false,
+            "followers_count": 5778,
+            "friends_count": 850,
+            "listed_count": 249,
+            "created_at": "Sun May 08 11:38:50 +0000 2016",
+            "favourites_count": 94218,
+            "utc_offset": -25200,
+            "time_zone": "Pacific Time (US & Canada)",
+            "geo_enabled": true,
+            "verified": false,
+            "statuses_count": 114809,
+            "lang": "en",
+            "contributors_enabled": false,
+            "is_translator": false,
+            "is_translation_enabled": false,
+            "profile_background_color": "000000",
+            "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+            "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+            "profile_background_tile": false,
+            "profile_image_url": "http://pbs.twimg.com/profile_images/729274746345553922/tSpsnyMo_normal.jpg",
+            "profile_image_url_https": "https://pbs.twimg.com/profile_images/729274746345553922/tSpsnyMo_normal.jpg",
+            "profile_banner_url": "https://pbs.twimg.com/profile_banners/729274353930637312/1462959865",
+            "profile_link_color": "E81C4F",
+            "profile_sidebar_border_color": "000000",
+            "profile_sidebar_fill_color": "000000",
+            "profile_text_color": "000000",
+            "profile_use_background_image": false,
+            "has_extended_profile": true,
+            "default_profile": false,
+            "default_profile_image": false,
+            "following": true,
+            "follow_request_sent": false,
+            "notifications": false,
+            "translator_type": "none"
+          },
+          "geo": null,
+          "coordinates": null,
+          "place": null,
+          "contributors": null,
+          "retweeted_status": {
+            "created_at": "Fri Apr 06 23:29:11 +0000 2018",
+            "id": 982399851177631700,
+            "id_str": "982399851177631746",
+            "text": "She wasn't the fairest....\nbut her love felt tangible\n\n~poetess\n\n#hangtenstories #PoemTrail #beautifulmess… https://t.co/rvrFwBgSqe",
+            "truncated": true,
+            "entities": {
+              "hashtags": [
+                {
+                  "text": "hangtenstories",
+                  "indices": [
+                    65,
+                    80
+                  ]
+                },
+                {
+                  "text": "PoemTrail",
+                  "indices": [
+                    81,
+                    91
+                  ]
+                },
+                {
+                  "text": "beautifulmess",
+                  "indices": [
+                    92,
+                    106
+                  ]
+                }
+              ],
+              "symbols": [],
+              "user_mentions": [],
+              "urls": [
+                {
+                  "url": "https://t.co/rvrFwBgSqe",
+                  "expanded_url": "https://twitter.com/i/web/status/982399851177631746",
+                  "display_url": "twitter.com/i/web/status/9…",
+                  "indices": [
+                    108,
+                    131
+                  ]
+                }
+              ]
+            },
+            "metadata": {
+              "iso_language_code": "en",
+              "result_type": "recent"
+            },
+            "source": "Twitter Web Client",
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "in_reply_to_screen_name": null,
+            "user": {
+              "id": 2299784766,
+              "id_str": "2299784766",
+              "name": "Dimple ©™",
+              "screen_name": "Dimple969",
+              "location": "UK",
+              "description": "Lost but not found yet~host of @dimpleverse  #poetry #haiku #mpy #vss https://t.co/oIkikqbRjn https://t.co/sVOwaBQfzl",
+              "url": null,
+              "entities": {
+                "description": {
+                  "urls": [
+                    {
+                      "url": "https://t.co/oIkikqbRjn",
+                      "expanded_url": "https://twitter.com/search?f=tweets&q=from:dimple969",
+                      "display_url": "twitter.com/search?f=tweet…",
+                      "indices": [
+                        70,
+                        93
+                      ]
+                    },
+                    {
+                      "url": "https://t.co/sVOwaBQfzl",
+                      "expanded_url": "http://favstar.fm/users/dimple969",
+                      "display_url": "favstar.fm/users/dimple969",
+                      "indices": [
+                        94,
+                        117
+                      ]
+                    }
+                  ]
+                }
+              },
+              "protected": false,
+              "followers_count": 12487,
+              "friends_count": 678,
+              "listed_count": 328,
+              "created_at": "Sun Jan 19 14:32:47 +0000 2014",
+              "favourites_count": 161439,
+              "utc_offset": 7200,
+              "time_zone": "Amsterdam",
+              "geo_enabled": false,
+              "verified": false,
+              "statuses_count": 57073,
+              "lang": "en",
+              "contributors_enabled": false,
+              "is_translator": false,
+              "is_translation_enabled": false,
+              "profile_background_color": "642D8B",
+              "profile_background_image_url": "http://abs.twimg.com/images/themes/theme10/bg.gif",
+              "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme10/bg.gif",
+              "profile_background_tile": true,
+              "profile_image_url": "http://pbs.twimg.com/profile_images/881917756689575936/QCmid8OY_normal.jpg",
+              "profile_image_url_https": "https://pbs.twimg.com/profile_images/881917756689575936/QCmid8OY_normal.jpg",
+              "profile_banner_url": "https://pbs.twimg.com/profile_banners/2299784766/1460747228",
+              "profile_link_color": "AB04BA",
+              "profile_sidebar_border_color": "FFFFFF",
+              "profile_sidebar_fill_color": "7AC3EE",
+              "profile_text_color": "3D1957",
+              "profile_use_background_image": true,
+              "has_extended_profile": true,
+              "default_profile": false,
+              "default_profile_image": false,
+              "following": true,
+              "follow_request_sent": false,
+              "notifications": false,
+              "translator_type": "none"
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "is_quote_status": false,
+            "retweet_count": 6,
+            "favorite_count": 12,
+            "favorited": false,
+            "retweeted": false,
+            "possibly_sensitive": false,
+            "lang": "en"
+          },
+          "is_quote_status": false,
+          "retweet_count": 6,
+          "favorite_count": 0,
+          "favorited": false,
+          "retweeted": false,
+          "lang": "en"
+        }
+      ],
+      "search_metadata": {
+        "completed_in": 0.03,
+        "max_id": 982495939985371100,
+        "max_id_str": "982495939985371136",
+        "next_results": "?max_id=982423796572409855&q=%23FriTease&count=10&include_entities=1",
+        "query": "%23FriTease",
+        "refresh_url": "?since_id=982495939985371136&q=%23FriTease&include_entities=1",
+        "count": 10,
+        "since_id": 0,
+        "since_id_str": "0"
+      }
+    },
+    "resp": {
+      "statusCode": 200,
+      "headers": {
+        "cache-control": "no-cache, no-store, must-revalidate, pre-check=0, post-check=0",
+        "connection": "close",
+        "content-disposition": "attachment; filename=json.json",
+        "content-encoding": "gzip",
+        "content-length": "5407",
+        "content-type": "application/json;charset=utf-8",
+        "date": "Sat, 07 Apr 2018 06:13:49 GMT",
+        "expires": "Tue, 31 Mar 1981 05:00:00 GMT",
+        "last-modified": "Sat, 07 Apr 2018 06:13:49 GMT",
+        "pragma": "no-cache",
+        "server": "tsa_b",
+        "set-cookie": [
+          "personalization_id=\"v1_uYbhSrhCd7Qe9V+XhAdXHg==\"; Expires=Mon, 06 Apr 2020 06:13:49 UTC; Path=/; Domain=.twitter.com",
+          "lang=en; Path=/",
+          "guest_id=v1%3A152308162899956446; Expires=Mon, 06 Apr 2020 06:13:49 UTC; Path=/; Domain=.twitter.com"
+        ],
+        "status": "200 OK",
+        "strict-transport-security": "max-age=631138519",
+        "x-access-level": "read-write",
+        "x-connection-hash": "6ef46b647d02bb1655c1e0a5549620fe",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "x-rate-limit-limit": "180",
+        "x-rate-limit-remaining": "168",
+        "x-rate-limit-reset": "1523082312",
+        "x-response-time": "98",
+        "x-transaction": "0094023500832030",
+        "x-twitter-response-tags": "BouncerCompliant",
+        "x-xss-protection": "1; mode=block; report=https://twitter.com/i/xss_report"
+      },
+      "request": {
+        "uri": {
+          "protocol": "https:",
+          "slashes": true,
+          "auth": null,
+          "host": "api.twitter.com",
+          "port": 443,
+          "hostname": "api.twitter.com",
+          "hash": null,
+          "search": "?q=%23FriTease&count=10",
+          "query": "q=%23FriTease&count=10",
+          "pathname": "/1.1/search/tweets.json",
+          "path": "/1.1/search/tweets.json?q=%23FriTease&count=10",
+          "href": "https://api.twitter.com/1.1/search/tweets.json?q=%23FriTease&count=10"
+        },
+        "method": "GET",
+        "headers": {
+          "Accept": "*/*",
+          "User-Agent": "twit-client",
+          "Content-type": "application/json",
+          "accept-encoding": "gzip, deflate",
+          "Authorization": "OAuth oauth_consumer_key=\"Y9AnVk74eTpZqx5yvcyrKRfO4\",oauth_nonce=\"8309b266a7514db9bcf84ee0955b1a5f\",oauth_signature_method=\"HMAC-SHA1\",oauth_timestamp=\"1523081628\",oauth_token=\"805852551090470914-IDq2Je3IniYRDj3TxA9zR3r2gNV6wM8\",oauth_version=\"1.0\",oauth_signature=\"R8%2BHaXvu6zHNweWTW84CJGQ7oDI%3D\""
+        }
+      }
+    }
+  }

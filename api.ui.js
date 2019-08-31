@@ -11,11 +11,11 @@ const utils = require('./comp/utils')
     , renderError = require('./comp/utils.rendering').renderError
     , renderUiError = require('./comp/utils.rendering').renderUiError;
 
-const friTease = (req, cache) => twitter.friTease({ friTease: true, ...req.query, cache});
+const friTease = (req) => twitter.friTease({ friTease: true, ...req.query});
 
 ////////////////////////////////////
 // UI Endpoints
-const init = (app, cache) => {
+const init = (app) => {
 
     app.post('/api/ui/ff5', (req, res) => {
         try {
@@ -51,7 +51,7 @@ const init = (app, cache) => {
             .catch(e => renderUiError(res, e));
     });
 
-    app.get('/api/ui/todolist', cache.route('/api/ui/todolist'), (req, res) => {
+    app.get('/api/ui/todolist', (req, res) => {
         twitter.getTodoList()
             .then(todos => {
                 res.render('partials/twitter/dashboard-simplelist', { layout: false, ...todos });
@@ -104,8 +104,8 @@ const init = (app, cache) => {
             });
     })
 
-    app.get('/api/ui/friTease', cache.route('/api/ui/friTease'), (req, res) => {
-        friTease(req, cache)
+    app.get('/api/ui/friTease', (req, res) => {
+        friTease(req)
             .then((stream) => {
                 Promise.all(stream.results.map(async s => await s.user.getFF5()))
                     .then(() => {

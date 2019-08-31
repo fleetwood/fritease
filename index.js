@@ -10,30 +10,12 @@ const api = require('./api');
 const apiUI = require('./api.ui');
 const utils = require('./comp/utils');
 const app = express();
-const cache = require('express-redis-cache')({
-  prefix: 'fritease',
-  expire: 1000*60*60*24
-});
-const twitter = require('./comp/twitter');
-const moment = utils.moment;
 const Scheduler = require('./comp/Scheduler');
 
 app.use(function (req, res, next) {
     req.rawBody = '';
     req.on('data', (chunk) => req.rawBody += chunk);
 
-    res.use_express_redis_cache = !(req.query.nocache || req.params.nocache);
-    const clearCache = (req.query.clearcache || req.params.clearcache);
-    if (clearCache) {
-        cache.del('*', (err, num) => {
-            if (err) {
-                console.log(`ERROR deleting cache!\n${err.toJsonString()}`);
-            }
-            else if(num) {
-                console.log(`Deleted cache (${num})`);
-            }
-        });
-    }
     next();
 });
 
@@ -61,9 +43,9 @@ hbs.registerHelper('gt', function (a, b, options) {
 });
 
 api.init(app);
-apiUI.init(app, cache);
+apiUI.init(app);
 
-app.get('/', cache.route('index'), (req, res) => {
+app.get('/', (req, res) => {
     res.render('index', {
       domain: req.get('host'),
       protocol: req.protocol,
@@ -71,7 +53,7 @@ app.get('/', cache.route('index'), (req, res) => {
       layout: 'layouts/default'
     });
   })
-  .get('/friTease', cache.route('friTease'), (req, res) => {
+  .get('/friTease', (req, res) => {
     res.render('friTease', {
           title:'Recent streams',
           layout: 'layouts/default'
@@ -105,10 +87,6 @@ app.get('/', cache.route('index'), (req, res) => {
         })
         .catch(e => reject(e));
   });
-
-if (config.knex.debug === true) {
-  cache.on('message', (message) => console.log(`REDIS : ${message}`));
-}
 
 new Scheduler();
 const server = http.createServer(app);

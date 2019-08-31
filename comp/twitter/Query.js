@@ -18,6 +18,7 @@ class Query {
             if (options.toDate) this.toDate(options.toDate);
             if (options.filterRetweets) this.filterRetweets();
             if (options.count) this.limit(options.count);
+            if (options.next) this.next(options.next);
         }
     }
 
@@ -142,6 +143,14 @@ class Query {
      */
     limit(num) {
         this._value.maxResults = num;
+        return this;
+    }
+
+    next(val) {
+        if (val !== "false") {
+            val = val.replaceAll('=','');
+            this._value.next = val;
+        }
         return this;
     }
 

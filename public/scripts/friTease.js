@@ -11,7 +11,7 @@ $(document).ready(function () {
         if (next) {
             streamContent.append(content);
             const top = $(`#page_${page}`).offset().top - 40;
-            $('html, body').animate({ scrollTop: top }, 800);
+            $('html, body').animate({scrollTop: top}, 800);
             return;
         }
         streamContent.html(content);

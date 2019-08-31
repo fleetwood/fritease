@@ -10,7 +10,7 @@ $(document).ready(function () {
         loadVisibility(false);
         if (next) {
             streamContent.append(content);
-            $('html, body').animate({scrollTop: $(`#page_${page}`).offset().top}, 800);
+            $('html, body').animate({scrollTop: $(`#page_${page}`).offset().top-50}, 800);
             return;
         }
         streamContent.html(content);

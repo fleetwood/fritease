@@ -64,30 +64,30 @@ class ScheduledItem {
 class Scheduler {
     constructor() {
         this.scheduledTime = this.nextThursday;
-        let wed = this.nextThursday.add(-12, 'h'),
-            first = this.nextThursday.add(8, 'h'),
-            second = this.nextThursday.add(16, 'h'),
+        let mon = this.nextThursday.add(-60, 'h'),
+            wed = this.nextThursday.add(-12, 'h'),
+            thurs = this.nextThursday.add(8, 'h'),
             prompt = this.nextThursday.add(18, 'h');
         this._schedules = [
             new ScheduledItem({
+                dueDate: mon,
+                message: `Watching FriTease.`,
+                notice: `Notice: watching FriTease.`
+            }),
+            new ScheduledItem({
                 dueDate: wed,
-                message: `Tomorrow's prompt is ready to go!`,
-                notice: `FriTease goes out tomorrow. Better get on it.`
+                message: `FriTease goes out tomorrow!`,
+                notice: `Notice: Nothing scheduled for tomorrow's FriTease.`
             }),
             new ScheduledItem({
-                dueDate: first,
+                dueDate: thurs,
                 message: `Today's prompt is ready to go!`,
-                notice: `You better check on today's prompt.`
-            }),
-            new ScheduledItem({
-                dueDate: second,
-                message: 'Second prompt reminder. No problems detected.',
-                notice: 'Prompt is due to go out in 2 hours!!!'
+                notice: `Warning: You better check on today's prompt.`
             }),
             new ScheduledItem({
                 dueDate: prompt,
                 message: 'Posting FriTease!',
-                notice: 'FriTease is overdue!!',
+                notice: 'DUDE!! FriTease is overdue!!',
                 action: () => {
                     return this.postScheduledPrompt();
                 }
@@ -105,6 +105,7 @@ class Scheduler {
 
     watchSchedules() {
         if (!this.isThursday) {
+            this.sendMessage('No FriTease today.')
             return;
         }
         if (!this._scheduledPrompt) {
@@ -124,9 +125,6 @@ class Scheduler {
             if (s.isDue) {
                 if (!this._scheduledPrompt) {
                     s.problems.push('No prompt is scheduled!')
-                }
-                else if (JSON.parse(this._scheduledPrompt.ff5_users).length < 5) {
-                    s.problems.push('Need to select FF5 users!')
                 }
                 s.complete();
             }

@@ -25,14 +25,8 @@
 THEME 1: "[THEME_1]"
 THEME 2: "[THEME_2]"
 
-#FF 5 peeps to follow 👁👁:
-[FF1]
-[FF2]
-[FF3]
-[FF4]
-[FF5]
-
 L/RT your favorites!
+Please remove Prompt Sites from reply threads. Thanks!
 @PromptList @PromptAdvant @thewritelist @writevent`
         
         ////////////////////////////////
